@@ -8,7 +8,9 @@ import queue
 from IPython.display import Video
 from scipy.optimize import curve_fit
 from helpers import parse_expression
-
+from time import sleep
+from tqdm import tqdm
+import csv 
 # Configure logging for debugging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -16,6 +18,9 @@ logger = logging.getLogger(__name__)
 # Base class for handling configuration and setup
 class SimulationBase:
     
+
+
+
 
     def __init__(self, config_file=None):
         self.base_vars = {}
@@ -25,11 +30,12 @@ class SimulationBase:
         self.simulation_domain = mp.Vector3(10, 10, 0)
         self.resolution = 16
         self.runtime = 100
+        self.config_file=config_file
         self.sim = None
         self._worker_thread = None
         mp.divide_parallel_processes(1)
         # shut up
-        mp.verbosity.meep = 0
+        mp.verbosity.meep = 2
         self._result_queue = queue.Queue()
         self._stop_event = threading.Event()
 
@@ -240,6 +246,7 @@ class SimulationBase:
                 logger.error(f"Error in target function {target.__name__}: {e}")
                 raise
         # Start the worker thread
+        
         self._worker_thread = threading.Thread(target=worker, args=(target, *args), kwargs=kwargs, daemon=False)
         self._worker_thread.start()
 
@@ -293,15 +300,23 @@ class RingResonator(SimulationBase):
             logger.error(f"Error adding fluxes: {e}")
 
     def find_resonances(self, resonance_conf_path : str):
+        
         try:
+
+
             with open(self.geometry_path) as config_file:
                 geometry_config = json.load(config_file)
                 
                 for geom in geometry_config:
                     if geom["type"] == "mp.Cylinder" and geom["radius"] == "radius":
+                        
+                        
                         center_x = parse_expression(self.base_vars, geom["center_x"])
                         center_y = parse_expression(self.base_vars, geom["center_y"])
                         center_z = parse_expression(self.base_vars, geom["center_z"])
+                        
+                        
+                        
                         
                         # Offset the position to a point near the ring's outer edge
                         y_offset = parse_expression(self.base_vars, geom["radius"]) + 0.5 * self.base_vars["ring_width"]
@@ -315,6 +330,7 @@ class RingResonator(SimulationBase):
                         )
                         self.sim.reset_meep()
                         # Run the simulation and collect resonance data
+                        #for i in tqdm(range(100)):
                         self.sim.run(
                             mp.at_beginning(mp.output_epsilon),
                             mp.after_sources(h),
@@ -339,10 +355,10 @@ class RingResonator(SimulationBase):
         normalized_q = [q / max_q for q in qFactor]
 
 
-        plt.scatter(resonances, normalized_q, label="Q factors", color="blue")
-        plt.xlabel("Frequency")
-        plt.ylabel("Q Factor")
-        plt.show()
+        # plt.scatter(resonances, normalized_q, label="Q factors", color="blue")
+        # plt.xlabel("Frequency")
+        # plt.ylabel("Q Factor")
+        # plt.show()
         # Filter modes with significant Q factors (e.g., >50% of max Q)
         threshold = 0.5
         significant_indices = [i for i, q in enumerate(normalized_q) if q > threshold]
@@ -360,12 +376,12 @@ class RingResonator(SimulationBase):
                 x_fit = np.linspace(min(significant_resonances), max(significant_resonances), 500)
                 y_fit = gaussian(x_fit, *popt)
 
-                plt.scatter(significant_resonances, significant_q, label="Significant Q factors", color="blue")
-                plt.plot(x_fit, y_fit, label="Gaussian Fit", color="red")
-                plt.xlabel("Frequency")
-                plt.ylabel("Q Factor")
-                plt.legend()
-                plt.show()
+                #plt.scatter(significant_resonances, significant_q, label="Significant Q factors", color="blue")
+                #plt.plot(x_fit, y_fit, label="Gaussian Fit", color="red")
+                #plt.xlabel("Frequency")
+                #plt.ylabel("Q Factor")
+                #plt.legend()
+                #plt.show()
 
                 # Choose the frequency corresponding to the Gaussian mean
                 chosen_frequency = fitted_mean
@@ -423,18 +439,20 @@ class RingResonator(SimulationBase):
         except Exception as e:
             print(f"An unexpected error occurred: {e}")
 
-    def run_resonance(self):
+    def run_resonance(self, safe_file, save_ez=False):
         # check if the source is the correct 
         try:
             with open(self.sources_path) as f:
                 sources = json.load(f)
                 print(sources)
-                valid_simulation_sources = [True for source in sources if source["useage"] == "simulation"]
+                valid_simulation_sources = [True for source in sources if source["usage"] == "simulation"]
                 if (len(valid_simulation_sources) == len(sources) and (len(sources) != 0)):
                     self.sim.run(mp.at_beginning(mp.output_epsilon),
                                  mp.to_appended("{}".format(self.config_file.split(".")[0]), mp.at_every(1, mp.output_efield_z)),
                                  until=self.runtime)
-                    pass
+                    if save_ez == True:
+                            self.waveguide_ez_field_save(safe_file)
+
                 else:
                     raise ValueError("Check {}! Not all source are having the right usage".format(self.sources_path))
         except:
@@ -465,6 +483,13 @@ class RingResonator(SimulationBase):
         plt.plot()
         plt.grid()
 
+    def waveguide_ez_field_save(self, safe_file, slice=None):
+        data = self.waveguide_ez_field()
+        with open(safe_file,'w') as myfile:
+            wr = csv.writer(myfile) #, quoting=csv.QUOTE_ALL)
+            wr.writerows(data)
+
+            
     def waveguide_ez_field(self, slice=None):
         ez_data = self.sim.get_array(center=mp.Vector3(), size=self.simulation_domain, component=mp.Ez)
         if slice == None:

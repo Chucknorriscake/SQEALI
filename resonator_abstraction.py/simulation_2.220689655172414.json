@@ -1,7 +1,7 @@
 {
     "base_vars": {
-        "wavelength": 2.544827586206897,
-        "df": 0.2,
+        "wavelength": 2.4204104994234275,
+        "df": 0.02,
         "nfreq": 1000,
         "radius": 2,
         "ring_width": 0.4,
@@ -13,7 +13,7 @@
         "waveguide_padding": 0.2
     },
     "derived_base_vars": {
-        "fcen": "1/wavelength",
+        "fcen": "1/2.4204104994234275",
         "freqs_min": "fcen-df/2",
         "freqs_max": "fcen+df/2",
         "outer_radius": "radius + ring_width",
@@ -33,7 +33,7 @@
             "depth": "dpml"
         }
     ],
-    "source_file": "harminv_sources.json",
+    "source_file": "simulation_sources.json",
     "geometry_file": "geometry.json",
     "flux_file": "flux.json"
 }
