@@ -1,5 +1,7 @@
 
-# Advanced Photonics MEEP Simulation
+# Squeal
+
+#### Advanced Photonics MEEP Simulation
 
 ## Description
 This framework streamlines the creation of MEEP simulations, transitioning from a code-based approach to an easily editable configuration file approach, where all simulation parameters are handled through `.json` files.
