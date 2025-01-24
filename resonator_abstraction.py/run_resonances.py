@@ -7,7 +7,7 @@ import os
 
 
 for conf_path in os.listdir(os.getcwd()):
-    if  "simulation_0.5.json" == conf_path: # ("simulation_" in conf_path) and (conf_path != "simulation_sources.json") and (".json" in conf_path):
+    if  ("simulation_" in conf_path) and (conf_path != "simulation_sources.json") and (".json" in conf_path):
         ez_path = "ez_" + conf_path.split(".")[0] + "." + conf_path.split(".")[1] + ".csv"
         resonator = RingResonator(config_file=conf_path)
-        #resonator.run(resonator.run_resonance,ez_path, True) 
+        resonator.run(resonator.run_resonance,ez_path, True) 

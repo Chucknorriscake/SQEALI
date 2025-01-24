@@ -1,6 +1,6 @@
 
-# Squeal
-
+# Squeali
+Simulation of QUEstionable ALgorythmic Integrity
 #### Advanced Photonics MEEP Simulation
 
 ## Description
