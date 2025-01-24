@@ -7,7 +7,7 @@
         "ring_width": 0.4,
         "n": 1.8,
         "resolution": 16,
-        "runtime": 3000,
+        "runtime": 10,
         "padding": 4,
         "dpml": 2,
         "waveguide_padding": 0.2
@@ -35,5 +35,6 @@
     ],
     "source_file": "simulation_sources.json",
     "geometry_file": "geometry.json",
-    "flux_file": "flux.json"
+    "flux_file": "flux.json",
+    "ez_file": "ez_simulation_0.5.csv"
 }

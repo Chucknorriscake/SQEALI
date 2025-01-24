@@ -5,15 +5,9 @@ import timeit
 import os
 
 
-start = timeit.default_timer()
 
 for conf_path in os.listdir(os.getcwd()):
-    if ("simulation_" in conf_path) and (conf_path != "simulation_sources.json"):
+    if  "simulation_0.5.json" == conf_path: # ("simulation_" in conf_path) and (conf_path != "simulation_sources.json") and (".json" in conf_path):
         ez_path = "ez_" + conf_path.split(".")[0] + "." + conf_path.split(".")[1] + ".csv"
-        print(ez_path)
         resonator = RingResonator(config_file=conf_path)
-        resonator.run(resonator.run_resonance,ez_path, True) 
-
-
-stop = timeit.default_timer()
-print('Time: ', stop - start)  
+        #resonator.run(resonator.run_resonance,ez_path, True) 

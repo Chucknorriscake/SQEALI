@@ -8,7 +8,6 @@ import queue
 from IPython.display import Video
 from scipy.optimize import curve_fit
 from helpers import parse_expression
-from time import sleep
 from tqdm import tqdm
 import csv 
 # Configure logging for debugging
@@ -17,41 +16,68 @@ logger = logging.getLogger(__name__)
 
 # Base class for handling configuration and setup
 class SimulationBase:
-    
-
-
-
-
-    def __init__(self, config_file=None):
+    '''
+    Meep wrapper that allows to build simulations by providing a framework that loads a JSON config file and sets up
+    the simulation domain accordingly to the file. 
+    '''
+    def __init__(self, config_file : str) -> None:
+        '''
+        just an init
+        
+        Keywords:
+            config_file: path of the config file that contains the simulation parameters
+        '''
         self.base_vars = {}
         self.sources = []
         self.geometry = []
         self.boundary_layers = []
         self.simulation_domain = mp.Vector3(10, 10, 0)
         self.resolution = 16
-        self.runtime = 100
+        self.runtime = 3000
         self.config_file=config_file
         self.sim = None
-        self._worker_thread = None
+        self.ez_field = None
+        # parallel processing 
         mp.divide_parallel_processes(1)
-        # shut up
-        mp.verbosity.meep = 2
+        # shut up if needed 
+        mp.verbosity.meep = 0
+        # multithreading support
+        self._worker_thread = None
         self._result_queue = queue.Queue()
         self._stop_event = threading.Event()
-
-        
+        # progress bar 
+        self.progress_bar = None # lifetime is set directly before starting the simulation
+        # load config file to setup the simulation
         if config_file:
             self.sim, self.sources_path ,self.flux_path,self.geometry_path = self._load_conf(config_file)
+            self._build_flux(self.flux_path)
+     
+#################################################################
+# Internal functions 
+#################################################################
 
     def _load_conf(self, path: str) -> mp.Simulation:
-        try:
-            
+        '''
+        loads the configuration file from a path containing JSON and returns a setup Meep Simulation object
+        
+        Keywords:
+            path: location of config file (JSON)
+        '''
+        try:  
             with open(path) as config_file:
                 config = json.load(config_file)
+
                 sources_path = config["source_file"]
                 flux_path = config["flux_file"]
                 geometry_path = config["geometry_file"]
-            
+                # load ez if file available:
+                try:
+                    ez_path = config["ez_file"]
+                    self.ez_field = self._load_ez_data(ez_path)
+                    logger.info("Simulation parameters have been run before and ez field has been loaded!")
+                except:
+                    pass
+                    
             self.base_vars = self._load_basic_variables(path)
             self.sources = self._build_sources(sources_path)
             self.geometry = self._build_geometry(geometry_path)
@@ -72,6 +98,16 @@ class SimulationBase:
             raise
 
     def _load_basic_variables(self, path: str) -> dict:
+        '''
+        basic variables define the geometric parameters of a Meep simulation, as well as the sources frequency and width.
+        these are loaded from the main config file directly
+        
+        Keywords:
+            path: location of main config file
+            
+        Return:
+            base_vars: dictionary of all basic variables from which the rest of the simulation domain will be set up 
+        '''
         try:
             with open(path) as config_file:
                 config = json.load(config_file)
@@ -91,15 +127,25 @@ class SimulationBase:
             logger.error(f"Error loading basic variables: {e}")
             raise
 
-    def _set_simulation_params(self):
+    def _set_simulation_params(self) -> None:
+        '''
+        Sets the resolution and runtime of the simulation domain
+        '''
         self.resolution = self.base_vars.get("resolution", 16)
         self.runtime = self.base_vars.get("runtime", 100)
 
     def _build_sources(self, path: str) -> list:
+        '''
+        builds the sources that are defined within the sources file
+        
+        Keywords: 
+            path: location of the sources file (JSON)
+        Return:
+            sources: list of mp.Sources that can be fed into mp.Simulation
+        '''
         try:
             with open(path) as f:
                 sources_config = json.load(f)
-                print(sources_config)
                 sources = []
 
                 for source_conf in sources_config:
@@ -133,6 +179,15 @@ class SimulationBase:
             raise
 
     def _build_geometry(self, path: str) -> list:
+        '''
+        builds the geometries that are defined within the geometry file. Right now ONLY cylinders and blocks are supported.
+        
+        Keywords: 
+            path: location of the geometries file (JSON)
+        
+        Return:
+            geometries: list of mp.Cylinder, mp.Blocks that can be fed into mp.Simulation
+        '''
         try:
             with open(path) as f:
                 geometry_config = json.load(f)
@@ -174,6 +229,15 @@ class SimulationBase:
             raise
 
     def _build_boundary_layers(self, path: str) -> list:
+        '''
+        creates the simulations boundary layer. Read directly from the config file
+        
+        Keywords: 
+        path: location of the main config file
+        
+        Return:
+            boundary_layers: list of boundary layers
+        '''
         try:
             with open(path) as config_file:
                 config = json.load(config_file)
@@ -190,6 +254,15 @@ class SimulationBase:
             raise
 
     def _build_cell(self, path: str) -> mp.Vector3:
+        '''
+        creates the simulations cell. Read directly from the config file
+        
+        Keywords: 
+            path: location of the main config file
+        
+        Return:
+            cell: mp.Vector3 of cell size 
+        '''
         try:
             with open(path) as config_file:
                 config = json.load(config_file)
@@ -202,19 +275,98 @@ class SimulationBase:
             logger.error(f"Error building simulation cell: {e}")
             raise
 
-    def view_sim_region(self) -> None:
+    def _build_flux(self, path : str) -> None:
+        '''
+        adds fluxes to the simulation domain if present
+        '''
         try:
-            plt.figure(dpi=150)
-            self.sim.plot2D()
-            plt.show()
+            with open(path) as fluxes:
+                flux_config = json.load(fluxes)
+                for flux in flux_config:
+                    size = mp.Vector3(
+                        parse_expression(self.base_vars, flux["size_x"]),
+                        parse_expression(self.base_vars, flux["size_y"]),
+                        parse_expression(self.base_vars, flux["size_z"]),
+                    )
+                    center = mp.Vector3(
+                        parse_expression(self.base_vars, flux["center_x"]),
+                        parse_expression(self.base_vars, flux["center_y"]),
+                        parse_expression(self.base_vars, flux["center_z"]),
+                    )
+
+                    flux_region = mp.FluxRegion(center=center, size=size)
+                    self.sim.add_flux(
+                        self.base_vars["fcen"], self.base_vars["df"], self.base_vars["nfreq"], flux_region
+                    )
         except Exception as e:
-            logger.error(f"Error visualizing simulation region: {e}")
+            logger.error(f"Error adding fluxes: {e}")
+
+    def _load_ez_data(self, path : str) -> None:
+        '''
+        loads ez_data, if there is ez_data available in 
+        
+        Keywords:
+            path: path to csv that stores the ez field after simulation across the simulation cell
+            
+        Return:
+            ez field: 2d np.array of simulation domain with ez field strength at every postion
+        '''
+        return np.loadtxt(path, delimiter=",")
+
+    def _append_to_config(self, params : dict) -> None:
+        '''
+        generic append function that allows to enlarge/edit the main config files by using a dictionary
+        
+        Keywords:
+            params: dictionary of params that should be edited or changed
+        '''
+        try:
+            # Load the existing configuration
+            with open(self.config_file, 'r') as config_file:
+                config = json.load(config_file)
+                for key in params:
+                    config[key] = params[key]
+                    
+            # Save the updated configuration back to the file
+            with open(self.config_file, 'w') as config_file:
+                json.dump(config, config_file, indent=4)
+        except: 
+            logger.error("File {} doesn't exist.".format(self.config_file))
+
+    def _waveguide_ez_field(self, slice=None):
+        '''
+        gets the ez_data from the simulation and flat out returns it.
+        '''
+        self.ez_data = self.sim.get_array(center=mp.Vector3(), size=self.simulation_domain, component=mp.Ez).transpose()
+        if slice == None:
+            return self.ez_data
+        else:
+            return self.ez_data[slice]
+    
+    def _waveguide_ez_field_save(self, safe_file : str):
+        '''
+        after a simulation is done this saves the ez field to a csv with defined path
+        
+        Keywords:
+            safe_file: location of the simulation ez field results
+        '''
+        ez_data = self._waveguide_ez_field()
+        # write ez to a csv
+        with open(safe_file,'w') as myfile:
+            wr = csv.writer(myfile)
+            wr.writerows(ez_data)
+        # add ez file path to config directory
+        self._append_to_config({"ez_file": safe_file})
+        
+#################################################################
+# Multithreading support 
+#################################################################
 
     def run(self, target, *args, **kwargs):
         """
         Start the simulation with a specified target function and its parameters.
     
-        Args:
+        Keywords:
             target (callable): The function to execute in the thread.
             *args: Positional arguments for the target function.
             **kwargs: Keyword arguments for the target function.
@@ -229,12 +381,12 @@ class SimulationBase:
             """
             Worker function that executes the target function with given parameters.
     
-            Args:
+            Keywords:
                 target (callable): The function to execute.
                 *args: Positional arguments for the target function.
                 **kwargs: Keyword arguments for the target function.
     
-            Returns:
+            Return:
                 The result of the target function.
             """
             try:
@@ -267,60 +419,77 @@ class SimulationBase:
         else:
             raise RuntimeError("No result available yet. Simulation may still be running.")
       
+      # Total simulation time
 
+    def progress_callback(self, sim):
+        self.progress_bar.update(1)
+
+#################################################################
+# External functions
+#################################################################
+
+    def view_sim_region(self) -> None:
+        '''
+        plots the simulation region to stdout. Useful to check config file.
+        '''
+        try:
+            plt.figure(dpi=150)
+            self.sim.plot2D()
+            plt.show()
+        except Exception as e:
+            logger.error(f"Error visualizing simulation region: {e}")
+ 
+    def get_waveguide_ez_field(self) -> np.array:
+        '''
+        external function to get the ez_field data from the simulation
+        '''
+        try:
+            if self.ez_field.any() == None :
+                # this will fail if ez_field has not been setup yet
+                pass
+        except:
+            logger.warning("Simulation has not been run! Please run simulation")
+            return [[0,0], [0,0]]
+        else:
+            return self.ez_data
+
+        
 # Derived class for ring resonator-specific functionality
 class RingResonator(SimulationBase):
-    def __init__(self, config_file=None):
+    '''
+    Ring resonator simulation that offers the possibility to find resonances by harminv simulations and later offers
+    full system simulation once a resonance for the specific simulation params have been found.
+    '''
+    def __init__(self, config_file : str) -> None:
+        '''
+        simple init that inherits from SimulationBase for simulation region setup
+        then adds the ring resonator specific parameters of resonances to the system
+        
+        Keywords:
+            config_file: location of the config file to set the simulation up
+        '''
         super().__init__(config_file)
         self.resonance_frequency = -1
         self.resonance_wavelength = -1
-        self.add_fluxes()
-
-    def add_fluxes(self):
-        try:
-            with open(self.flux_path) as fluxes:
-                flux_config = json.load(fluxes)
-                for flux in flux_config:
-                    size = mp.Vector3(
-                        parse_expression(self.base_vars, flux["size_x"]),
-                        parse_expression(self.base_vars, flux["size_y"]),
-                        parse_expression(self.base_vars, flux["size_z"]),
-                    )
-                    center = mp.Vector3(
-                        parse_expression(self.base_vars, flux["center_x"]),
-                        parse_expression(self.base_vars, flux["center_y"]),
-                        parse_expression(self.base_vars, flux["center_z"]),
-                    )
-
-                    flux_region = mp.FluxRegion(center=center, size=size)
-                    self.sim.add_flux(
-                        self.base_vars["fcen"], self.base_vars["df"], self.base_vars["nfreq"], flux_region
-                    )
-        except Exception as e:
-            logger.error(f"Error adding fluxes: {e}")
-
+  
     def find_resonances(self, resonance_conf_path : str):
+        '''
+        puts a harminv object within the ring resonator, resets the simulation (just in case the 
+        simulation had some shenanigans done to it) and runs it
         
+        Keywords:
+            resonance_conf_path: output path to where to simulation details for the found resonance should be stored
+        '''
         try:
-
-
             with open(self.geometry_path) as config_file:
                 geometry_config = json.load(config_file)
-                
                 for geom in geometry_config:
-                    if geom["type"] == "mp.Cylinder" and geom["radius"] == "radius":
-                        
-                        
+                    if geom["type"] == "mp.Cylinder" and geom["radius"] == "radius": 
                         center_x = parse_expression(self.base_vars, geom["center_x"])
                         center_y = parse_expression(self.base_vars, geom["center_y"])
                         center_z = parse_expression(self.base_vars, geom["center_z"])
-                        
-                        
-                        
-                        
                         # Offset the position to a point near the ring's outer edge
                         y_offset = parse_expression(self.base_vars, geom["radius"]) + 0.5 * self.base_vars["ring_width"]
-                        
                         # Create a Harminv object for resonance analysis
                         h = mp.Harminv(
                             mp.Ez, 
@@ -330,13 +499,14 @@ class RingResonator(SimulationBase):
                         )
                         self.sim.reset_meep()
                         # Run the simulation and collect resonance data
-                        #for i in tqdm(range(100)):
+                        self.progress_bar = tqdm(total=self.runtime, desc="Simulation Progress")
+                        print("\n")
                         self.sim.run(
                             mp.at_beginning(mp.output_epsilon),
                             mp.after_sources(h),
                             until_after_sources=self.runtime
                         )
-                        
+                        self.progress_bar.close()
                         # Log the detected resonances
                         logger.info(f"Resonances detected: {h.modes}")
                         q = read_property_of_harminv(h, "Q")
@@ -344,12 +514,21 @@ class RingResonator(SimulationBase):
                         self.resonance_frequency = self.get_resonance_from_q_factor(q, resonances)
                         self.resonance_wavelength = 1/self.resonance_frequency
                         self.write_simulation_config("conf_overcoupling.json", resonance_conf_path)
+                        #self._append_to_config()
                         
         except Exception as e:
             logger.error(f"Error finding resonances: {e}")
 
     def get_resonance_from_q_factor(self, qFactor, resonances):
-
+        '''
+        find the resonance from the harminv q factor
+        
+        Keywords:
+            qFactor: list of qFactors
+            resonances: list of resonances
+        Return:
+            resonance: resonance frequency of the ring if it exists
+        '''
         # Normalize Q factors
         max_q = max(qFactor)
         normalized_q = [q / max_q for q in qFactor]
@@ -385,8 +564,8 @@ class RingResonator(SimulationBase):
 
                 # Choose the frequency corresponding to the Gaussian mean
                 chosen_frequency = fitted_mean
-                return chosen_frequency
                 print(f"Chosen frequency based on Gaussian fit: {chosen_frequency}")
+                return chosen_frequency
             except RuntimeError as e:
                 print(f"Gaussian fit failed: {e}")
                 chosen_frequency = resonances[np.argmax(qFactor)]
@@ -402,9 +581,9 @@ class RingResonator(SimulationBase):
         """
         Updates the resonance wavelength in the 'base_vars' of the configuration file.
 
-        Args:
-            config_file (str): Path to the configuration file.
-            new_wavelength (float): The new resonance wavelength to be updated.
+        Keywords:
+            config_file: Path to the configuration file.
+            new_wavelength: The new resonance wavelength to be updated.
         """
         try:
             # Load the existing configuration
@@ -439,35 +618,61 @@ class RingResonator(SimulationBase):
         except Exception as e:
             print(f"An unexpected error occurred: {e}")
 
-    def run_resonance(self, safe_file, save_ez=False):
+    def run_resonance(self, save_ez=False):
+        """
+        once resonances are found, this function runs the simulation until the self.runtime is reached
+        
+        Keywords:
+            save_ez: boolean of whether you want to save ez or just discard it
+        """
+        # TODO: if the resonance has been run already: ask if it should be rerun
+        
         # check if the source is the correct 
         try:
             with open(self.sources_path) as f:
                 sources = json.load(f)
-                print(sources)
+                # allows to run the simulation ONLY if we're loading the correct sources - else aborts
                 valid_simulation_sources = [True for source in sources if source["usage"] == "simulation"]
                 if (len(valid_simulation_sources) == len(sources) and (len(sources) != 0)):
+                    self.progress_bar = tqdm(total=self.runtime, desc="Simulation Progress")
                     self.sim.run(mp.at_beginning(mp.output_epsilon),
-                                 mp.to_appended("{}".format(self.config_file.split(".")[0]), mp.at_every(1, mp.output_efield_z)),
+                                 mp.to_appended("{}".format(self.config_file.split(".")[0]), mp.at_every(1, lambda sim: self.progress_callback(sim))),
                                  until=self.runtime)
+                    self.progress_bar.close()
+                    # save ez to a file
+                    safe_file = ""
                     if save_ez == True:
-                            self.waveguide_ez_field_save(safe_file)
-
+                        for elem in self.config_file.split("."):
+                            if elem != self.config_file.split(".")[-1]:
+                                safe_file += elem
+                        safe_file = "ez_" + safe_file + ".csv"
+                        self._waveguide_ez_field_save(safe_file)
                 else:
-                    raise ValueError("Check {}! Not all source are having the right usage".format(self.sources_path))
+                    logger.error("Check {}! Not all source are having the right usage".format(self.sources_path))
         except:
             raise FileExistsError("File {} does not exist".format(self.sources_path))
 
-    def plot_field_result(self):
-        ez_data = self.sim.get_array(center=mp.Vector3(), size=self.simulation_domain, component=mp.Ez)
-        plt.imshow(ez_data.transpose()[70:200])
+    def plot_field_result(self, slice: tuple) -> None:
+        '''
+        plot the field results 
+        
+        Keywords:
+            slice: tuple of a y axis section that should be in focus while plotting
+        '''
+        plt.imshow(self.ez_data[slice[0]:slice[1]])
         plt.show()
 
-    def plot_coupling(self, plot_params_guess):
+    def plot_coupling(self, plot_params_guess=[0.08,0.3, 5], slice=90):
+        '''
+        rudimentary fitting function that should take the wavefront along the linear waveguide and then fits a sinusoidal
+        function to the interferred part of the function
+        
+        Keywords:
+            plot_params_guess: guess for the fitting parameters (default works well for the set example )
+            slice: 1d array element of the row in which the linear waveguide sits within the simulation domain
+        '''
         ez_data = self.sim.get_array(center=mp.Vector3(), size=self.simulation_domain, component=mp.Ez)
-        plt.plot(ez_data.transpose()[90],  "--", alpha=0.5, label="simulation")
-
-
+        plt.plot(ez_data.transpose()[slice],  "--", alpha=0.5, label="simulation")
         xdata_start= 250
         xdata_end = 370
         ydata = ez_data.transpose()[90][xdata_start:xdata_end]
@@ -483,22 +688,6 @@ class RingResonator(SimulationBase):
         plt.plot()
         plt.grid()
 
-    def waveguide_ez_field_save(self, safe_file, slice=None):
-        data = self.waveguide_ez_field()
-        with open(safe_file,'w') as myfile:
-            wr = csv.writer(myfile) #, quoting=csv.QUOTE_ALL)
-            wr.writerows(data)
-
-            
-    def waveguide_ez_field(self, slice=None):
-        ez_data = self.sim.get_array(center=mp.Vector3(), size=self.simulation_domain, component=mp.Ez)
-        if slice == None:
-            return ez_data.transpose()
-        else:
-            return ez_data.transpose()[slice]
-        
-        
-        
 def sinus(x, a, b, c):
     return a * np.sin(b * x + c)
 

@@ -1,19 +1,19 @@
 {
     "base_vars": {
-        "wavelength": 5.462068965517242,
-        "df": 0.2,
+        "wavelength": 0.4783646814658198,
+        "df": 0.02,
         "nfreq": 1000,
         "radius": 2,
         "ring_width": 0.4,
         "n": 1.8,
         "resolution": 16,
-        "runtime": 3000,
+        "runtime": 10,
         "padding": 4,
         "dpml": 2,
         "waveguide_padding": 0.2
     },
     "derived_base_vars": {
-        "fcen": "1/wavelength",
+        "fcen": "1/0.4783646814658198",
         "freqs_min": "fcen-df/2",
         "freqs_max": "fcen+df/2",
         "outer_radius": "radius + ring_width",
@@ -33,7 +33,8 @@
             "depth": "dpml"
         }
     ],
-    "source_file": "harminv_sources.json",
+    "source_file": "simulation_sources.json",
     "geometry_file": "geometry.json",
-    "flux_file": "flux.json"
+    "flux_file": "flux.json",
+    "ez_file": "ez_simulation_05 copy.csv"
 }
