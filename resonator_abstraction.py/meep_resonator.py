@@ -337,11 +337,11 @@ class SimulationBase:
         '''
         gets the ez_data from the simulation and flat out returns it.
         '''
-        self.ez_data = self.sim.get_array(center=mp.Vector3(), size=self.simulation_domain, component=mp.Ez).transpose()
+        self.ez_field = self.sim.get_array(center=mp.Vector3(), size=self.simulation_domain, component=mp.Ez).transpose()
         if slice == None:
-            return self.ez_data
+            return self.ez_field
         else:
-            return self.ez_data[slice]
+            return self.ez_field[slice]
     
     def _waveguide_ez_field_save(self, safe_file : str):
         '''
@@ -451,7 +451,7 @@ class SimulationBase:
             logger.warning("Simulation has not been run! Please run simulation")
             return [[0,0], [0,0]]
         else:
-            return self.ez_data
+            return self.ez_field
 
         
 # Derived class for ring resonator-specific functionality
@@ -500,7 +500,6 @@ class RingResonator(SimulationBase):
                         self.sim.reset_meep()
                         # Run the simulation and collect resonance data
                         self.progress_bar = tqdm(total=self.runtime, desc="Simulation Progress")
-                        print("\n")
                         self.sim.run(
                             mp.at_beginning(mp.output_epsilon),
                             mp.after_sources(h),
@@ -645,7 +644,8 @@ class RingResonator(SimulationBase):
                         for elem in self.config_file.split("."):
                             if elem != self.config_file.split(".")[-1]:
                                 safe_file += elem
-                        safe_file = "ez_" + safe_file + ".csv"
+                                #safe_file += "."
+                        safe_file = "ez_" + safe_file + "csv"
                         self._waveguide_ez_field_save(safe_file)
                 else:
                     logger.error("Check {}! Not all source are having the right usage".format(self.sources_path))
@@ -659,7 +659,7 @@ class RingResonator(SimulationBase):
         Keywords:
             slice: tuple of a y axis section that should be in focus while plotting
         '''
-        plt.imshow(self.ez_data[slice[0]:slice[1]])
+        plt.imshow(self.ez_field[slice[0]:slice[1]])
         plt.show()
 
     def plot_coupling(self, plot_params_guess=[0.08,0.3, 5], slice=90):

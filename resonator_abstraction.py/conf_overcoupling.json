@@ -1,6 +1,6 @@
 {
     "base_vars": {
-        "wavelength": 5.462068965517242,
+        "wavelength": 10.0,
         "df": 0.2,
         "nfreq": 1000,
         "radius": 2,
