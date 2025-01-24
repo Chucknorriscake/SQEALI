@@ -85,7 +85,7 @@ Using this library is straightforward. Once the configuration files, described i
 To use ring resonators:
 
 ```python
-resonator = RingResonator("[path to main config.json]")
+resonator = RingResonator("path_to_main_config.json")
 ```
 
 This loads the desired ring resonator configuration into the class and automatically sets up the MEEP environment.  
@@ -93,7 +93,7 @@ Since the resonance frequency of this setup is originally unknown, follow these 
 
 1. Perform a Harminv simulation with a Gaussian source by running:
    ```python
-   resonator.find_resonances("path_to_result_config")
+   resonator.find_resonances("path_to_find_resonance_config.json")
    ```
    This automatically creates a preconfigured, updated configuration file for step two. By default, the path to the source file is changed to `"simulation_source.json"`, as the provided simulation source switches to an `mp.ContinuousSource`.
 
@@ -111,12 +111,12 @@ Since the resonance frequency of this setup is originally unknown, follow these 
 
 #### DISCLAIMER: Not implemented
 ```python
-parallel = ParallelWaveguides("[path to main config.json]")
+parallel = ParallelWaveguides("path_to_main_config.json")
 ```
 
 ## Base Simulation
 ```python
-simpleBase = SimulationBase("[path to main config.json]")
+simpleBase = SimulationBase("path_to_main_config.json")
 ```
 The `SimulationBase` class serves as the foundation, reading all the required configuration files and setting up the basic simulation environment.
 
