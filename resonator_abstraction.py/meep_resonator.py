@@ -503,6 +503,7 @@ class RingResonator(SimulationBase):
                         self.sim.run(
                             mp.at_beginning(mp.output_epsilon),
                             mp.after_sources(h),
+                            mp.at_every(1, lambda sim: self.progress_callback(sim)),
                             until_after_sources=self.runtime
                         )
                         self.progress_bar.close()
