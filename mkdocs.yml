@@ -1,6 +1,5 @@
 site_name: SQEALI
-site_url: https://julianverhey.gitlab.io/advancedphotonicsmeep/
-
+site_url: https://julianverhey.physics.unitn.it/advancedphotonicsmeep
 theme:
   name: material
 
