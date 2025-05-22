@@ -1,0 +1,2474 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../simbase/">
+      
+      
+        <link rel="next" href="../linearwaveguide/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Ring Resonator - SQEALI</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ring-resonator" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="SQEALI" class="md-header__button md-logo" aria-label="SQEALI" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SQEALI
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Ring Resonator
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="SQEALI" class="md-nav__button md-logo" aria-label="SQEALI" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SQEALI
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../simbase/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Simulation Base
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Ring Resonator
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ring Resonator
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stage-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stage 1
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stage 1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#base-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Base Variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#harminv-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      Harminv Source
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stage-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stage 2
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stage 2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generated-base-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generated Base Variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#continuous-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      Continuous Source
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stage-1-and-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stage 1 and 2
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stage 1 and 2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#geometry" class="md-nav__link">
+    <span class="md-ellipsis">
+      Geometry
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Flux
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Script
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example Script">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-sweep-over-wavelengths-and-find-resonances" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1: Sweep Over Wavelengths and Find Resonances
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-run-simulations-for-each-resonance-config" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2: Run Simulations for Each Resonance Config
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Documentation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resonator_abstraction.meep_resonator.RingResonator" class="md-nav__link">
+    <span class="md-ellipsis">
+      RingResonator
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resonator_abstraction.meep_resonator.RingResonator.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      __init__
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resonator_abstraction.meep_resonator.RingResonator.find_resonances" class="md-nav__link">
+    <span class="md-ellipsis">
+      find_resonances
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resonator_abstraction.meep_resonator.RingResonator.get_resonance_from_q_factor" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_resonance_from_q_factor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resonator_abstraction.meep_resonator.RingResonator.plot_coupling" class="md-nav__link">
+    <span class="md-ellipsis">
+      plot_coupling
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resonator_abstraction.meep_resonator.RingResonator.plot_field_result" class="md-nav__link">
+    <span class="md-ellipsis">
+      plot_field_result
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resonator_abstraction.meep_resonator.RingResonator.run_resonance" class="md-nav__link">
+    <span class="md-ellipsis">
+      run_resonance
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resonator_abstraction.meep_resonator.RingResonator.write_simulation_config" class="md-nav__link">
+    <span class="md-ellipsis">
+      write_simulation_config
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../linearwaveguide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linear Waveguide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stage-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stage 1
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stage 1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#base-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Base Variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#harminv-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      Harminv Source
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stage-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stage 2
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stage 2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generated-base-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generated Base Variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#continuous-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      Continuous Source
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stage-1-and-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stage 1 and 2
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stage 1 and 2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#geometry" class="md-nav__link">
+    <span class="md-ellipsis">
+      Geometry
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Flux
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Script
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example Script">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-sweep-over-wavelengths-and-find-resonances" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1: Sweep Over Wavelengths and Find Resonances
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-run-simulations-for-each-resonance-config" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2: Run Simulations for Each Resonance Config
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Documentation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resonator_abstraction.meep_resonator.RingResonator" class="md-nav__link">
+    <span class="md-ellipsis">
+      RingResonator
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resonator_abstraction.meep_resonator.RingResonator.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      __init__
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resonator_abstraction.meep_resonator.RingResonator.find_resonances" class="md-nav__link">
+    <span class="md-ellipsis">
+      find_resonances
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resonator_abstraction.meep_resonator.RingResonator.get_resonance_from_q_factor" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_resonance_from_q_factor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resonator_abstraction.meep_resonator.RingResonator.plot_coupling" class="md-nav__link">
+    <span class="md-ellipsis">
+      plot_coupling
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resonator_abstraction.meep_resonator.RingResonator.plot_field_result" class="md-nav__link">
+    <span class="md-ellipsis">
+      plot_field_result
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resonator_abstraction.meep_resonator.RingResonator.run_resonance" class="md-nav__link">
+    <span class="md-ellipsis">
+      run_resonance
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resonator_abstraction.meep_resonator.RingResonator.write_simulation_config" class="md-nav__link">
+    <span class="md-ellipsis">
+      write_simulation_config
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="ring-resonator">Ring Resonator</h1>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#configuration">Configuration</a><ul>
+<li><a href="#stage-1">Stage 1</a><ul>
+<li><a href="#base-variables">Base Variables</a></li>
+<li><a href="#harminv-source">Harminv Source</a></li>
+</ul>
+</li>
+<li><a href="#stage-2">Stage 2</a><ul>
+<li><a href="#generated-base-variables">Generated Base Variables</a></li>
+<li><a href="#continuous-source">Continuous Source</a></li>
+</ul>
+</li>
+<li><a href="#stage-1-and-2">Stage 1 &amp; 2</a><ul>
+<li><a href="#geometry">Geometry</a></li>
+<li><a href="#flux">Flux</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#example-script">Example Script</a></li>
+<li><a href="#documentation">Documentation</a></li>
+</ul>
+<h2 id="overview">Overview</h2>
+<p>This simulation models a ring resonator coupled to a waveguide. It proceeds in two stages:
+1. Estimate the resonance frequency using a Gaussian source and Harminv.
+2. Simulate steady-state behavior using a continuous source at the resonance frequency.</p>
+<h2 id="configuration">Configuration</h2>
+<p>The configuration is a twofold process. For step 1 we use a Gaussian source. and a wide range of frequencies to find resonances within the ring. For step two the script creates a new file that uses a continouus source and changes the wavelength to the resonance wavelength.</p>
+<h3 id="stage-1">Stage 1</h3>
+<h4 id="base-variables">Base Variables</h4>
+<pre><code class="language-json">{
+    &quot;base_vars&quot;: {
+        &quot;wavelength&quot;: 3.0,
+        &quot;df&quot;: 0.2,
+        &quot;nfreq&quot;: 1000,
+        &quot;radius&quot;: 2,
+        &quot;ring_width&quot;: 0.4,
+        &quot;n&quot;: 1.8,
+        &quot;resolution&quot;: 16,
+        &quot;runtime&quot;: 5000,
+        &quot;padding&quot;: 2,
+        &quot;dpml&quot;: 2,
+        &quot;waveguide_padding&quot;: 0.23
+    },
+    &quot;derived_base_vars&quot;: {
+        &quot;fcen&quot;: &quot;1/wavelength&quot;,
+        &quot;freqs_min&quot;: &quot;fcen-df/2&quot;,
+        &quot;freqs_max&quot;: &quot;fcen+df/2&quot;,
+        &quot;outer_radius&quot;: &quot;radius + ring_width&quot;,
+        &quot;waveguide_width&quot;: &quot;ring_width&quot;,
+        &quot;sy&quot;: &quot;2*(outer_radius + padding + dpml)&quot;,
+        &quot;waveguide_xpos&quot;: &quot;-(radius+ ring_width + waveguide_padding)&quot;,
+        &quot;sx&quot;: &quot;sy + 50&quot;
+    },
+    &quot;cell&quot;: {
+        &quot;size_x&quot;: &quot;sx&quot;,
+        &quot;size_y&quot;: &quot;sy&quot;,
+        &quot;size_z&quot;: &quot;0&quot;
+    },
+    &quot;boundary_layer&quot;: [
+        {
+            &quot;type&quot;: &quot;mp.PML&quot;,
+            &quot;depth&quot;: &quot;dpml&quot;
+        }
+    ],
+    &quot;geometry_file&quot;: &quot;geometry.json&quot;,
+    &quot;flux_file&quot;: &quot;flux.json&quot;,
+    &quot;source_file&quot;: &quot;harminv_sources.json&quot;,
+
+}
+</code></pre>
+<h4 id="harminv-source">Harminv Source</h4>
+<pre><code class="language-json">[
+  {
+    &quot;usage&quot;: &quot;harminv&quot;,
+    &quot;type&quot;: &quot;mp.GaussianSource&quot;,
+    &quot;component&quot;: &quot;mp.Ez&quot;,
+    &quot;center_x&quot;: &quot;-sx/2 + dpml + 0.5&quot;,
+    &quot;center_y&quot;: &quot;waveguide_xpos&quot;,
+    &quot;center_z&quot;: &quot;0&quot;,
+    &quot;size_x&quot;: &quot;0&quot;,
+    &quot;size_y&quot;: &quot;0.5*ring_width&quot;,
+    &quot;size_z&quot;: &quot;0&quot;
+  }
+]
+</code></pre>
+<h3 id="stage-2">Stage 2</h3>
+<p>These file is generated automatically.</p>
+<h4 id="generated-base-variables">Generated Base Variables</h4>
+<pre><code class="language-json">{
+    &quot;base_vars&quot;: {
+        &quot;wavelength&quot;: &quot;[resonance from step 1]&quot;,
+        &quot;df&quot;: 0.02,
+        &quot;nfreq&quot;: 1000,
+        &quot;radius&quot;: 2,
+        &quot;ring_width&quot;: 0.4,
+        &quot;n&quot;: 1.8,
+        &quot;resolution&quot;: 16,
+        &quot;runtime&quot;: 2500,
+        &quot;padding&quot;: 2,
+        &quot;dpml&quot;: 2,
+        &quot;waveguide_padding&quot;: 0.23
+    },
+    &quot;derived_base_vars&quot;: {
+        &quot;fcen&quot;: &quot;1/[resonance from step 1]&quot;,
+        &quot;freqs_min&quot;: &quot;fcen-df/2&quot;,
+        &quot;freqs_max&quot;: &quot;fcen+df/2&quot;,
+        &quot;outer_radius&quot;: &quot;radius + ring_width&quot;,
+        &quot;waveguide_width&quot;: &quot;ring_width&quot;,
+        &quot;sy&quot;: &quot;2*(outer_radius + padding + dpml)&quot;,
+        &quot;waveguide_xpos&quot;: &quot;-(radius+ ring_width + waveguide_padding)&quot;,
+        &quot;sx&quot;: &quot;sy + 50&quot;
+    },
+    &quot;cell&quot;: {
+        &quot;size_x&quot;: &quot;sx&quot;,
+        &quot;size_y&quot;: &quot;sy&quot;,
+        &quot;size_z&quot;: &quot;0&quot;
+    },
+    &quot;boundary_layer&quot;: [
+        {
+            &quot;type&quot;: &quot;mp.PML&quot;,
+            &quot;depth&quot;: &quot;dpml&quot;
+        }
+    ],
+    &quot;source_file&quot;: &quot;simulation_sources.json&quot;,
+    &quot;geometry_file&quot;: &quot;geometry.json&quot;,
+    &quot;flux_file&quot;: &quot;flux.json&quot;,
+    &quot;ez_file&quot;: &quot;ez_simulation_[resonance from step 1].csv&quot;
+}
+</code></pre>
+<h4 id="continuous-source">Continuous Source</h4>
+<pre><code class="language-json">[
+  {
+    &quot;usage&quot;: &quot;simulation&quot;,
+    &quot;type&quot;: &quot;mp.ContinuousSource&quot;,
+    &quot;component&quot;: &quot;mp.Ez&quot;,
+    &quot;center_x&quot;: &quot;-sx/2 + dpml + 0.5&quot;,
+    &quot;center_y&quot;: &quot;waveguide_xpos&quot;,
+    &quot;center_z&quot;: &quot;0&quot;,
+    &quot;size_x&quot;: &quot;0&quot;,
+    &quot;size_y&quot;: &quot;0.5*ring_width&quot;,
+    &quot;size_z&quot;: &quot;0&quot;
+  }
+]
+</code></pre>
+<h3 id="stage-1-and-2">Stage 1 and 2</h3>
+<p>Both stages use the same geometry and flux configuration.</p>
+<h4 id="geometry">Geometry</h4>
+<pre><code class="language-json">[
+    {
+        &quot;type&quot;: &quot;mp.Cylinder&quot;,
+        &quot;radius&quot;: &quot;outer_radius&quot;,
+        &quot;center_x&quot;: &quot;0&quot;,
+        &quot;center_y&quot;: &quot;0&quot;,
+        &quot;center_z&quot;: &quot;0&quot;,
+        &quot;material_index&quot;: &quot;n&quot;
+    },
+    {
+        &quot;type&quot;: &quot;mp.Cylinder&quot;,
+        &quot;radius&quot;: &quot;radius&quot;,
+        &quot;center_x&quot;: &quot;0&quot;,
+        &quot;center_y&quot;: &quot;0&quot;,
+        &quot;center_z&quot;: &quot;0&quot;,
+        &quot;material_index&quot;: &quot;1&quot;
+    },
+    {
+        &quot;type&quot;: &quot;mp.Block&quot;,
+        &quot;size_x&quot;: &quot;1e20&quot;,
+        &quot;size_y&quot;: &quot;waveguide_width&quot;,
+        &quot;size_z&quot;: &quot;1e20&quot;,
+        &quot;center_x&quot;: &quot;0&quot;,
+        &quot;center_y&quot;: &quot;waveguide_xpos&quot;,
+        &quot;center_z&quot;: &quot;0&quot;,
+        &quot;material_index&quot;: &quot;n&quot;
+    }
+]
+</code></pre>
+<h4 id="flux">Flux</h4>
+<pre><code class="language-json">[
+    {
+        &quot;size_x&quot;: &quot;0&quot;,
+        &quot;size_y&quot;: &quot; 0.5*ring_width&quot;,
+        &quot;size_z&quot;: &quot;0&quot;,
+        &quot;center_x&quot;: &quot;-sx/2 +dpml + 0.5+3&quot;,
+        &quot;center_y&quot;: &quot;waveguide_xpos&quot;,
+        &quot;center_z&quot;: &quot;0&quot;
+    },
+    {
+        &quot;size_x&quot;: &quot;0&quot;,
+        &quot;size_y&quot;: &quot; 0.5*ring_width&quot;,
+        &quot;size_z&quot;: &quot;0&quot;,
+        &quot;center_x&quot;: &quot;sx/2 -dpml - 0.5&quot;,
+        &quot;center_y&quot;: &quot;waveguide_xpos&quot;,
+        &quot;center_z&quot;: &quot;0&quot;
+    }
+]
+</code></pre>
+<h2 id="example-script">Example Script</h2>
+<p>This two-step simulation process finds resonant frequencies and then runs full simulations for each using Meep and the <code>RingResonator</code> class.</p>
+<hr />
+<h3 id="step-1-sweep-over-wavelengths-and-find-resonances">Step 1: Sweep Over Wavelengths and Find Resonances</h3>
+<p>This script updates the configuration file for each wavelength, initializes a <code>RingResonator</code> object, and finds resonant frequencies using <code>find_resonances</code>.</p>
+<pre><code class="language-python">from meep_resonator import *
+import numpy as np
+import json
+import timeit
+
+start = timeit.default_timer()
+
+# Define wavelength sweep range
+wavelengths = np.linspace(0.6, 10, 30)
+
+# Path to base configuration file
+conf_path = &quot;conf_overcoupling.json&quot;
+
+for wavelength in wavelengths:
+    try:
+        # Load base config and update wavelength
+        with open(conf_path) as config_file:
+            config = json.load(config_file)
+            config[&quot;base_vars&quot;][&quot;wavelength&quot;] = wavelength
+
+        # Save updated config
+        with open(conf_path, 'w') as f:
+            json.dump(config, f, indent=4)
+
+        # Initialize resonator and run harminv-based frequency detection
+        resonator = RingResonator(config_file=conf_path)
+        print(f&quot;Running resonance detection at wavelength: {resonator.base_vars['wavelength']}&quot;)
+        resonator.find_resonances(
+            resonance_conf_path=f&quot;simulation_{wavelength}.json&quot;
+        )
+
+    except Exception as e:
+        raise FileNotFoundError(f&quot;Error processing wavelength {wavelength}: {e}&quot;)
+
+stop = timeit.default_timer()
+print('Total Time: ', stop - start)
+</code></pre>
+<hr />
+<h3 id="step-2-run-simulations-for-each-resonance-config">Step 2: Run Simulations for Each Resonance Config</h3>
+<p>This script loops through all generated resonance config files and runs the actual simulation using the detected resonant frequency.</p>
+<pre><code class="language-python">from meep_resonator import *
+import os
+
+# Iterate over all simulation config files
+for conf_path in os.listdir(os.getcwd()):
+    if (&quot;simulation_&quot; in conf_path) and (conf_path != &quot;simulation_sources.json&quot;) and (conf_path.endswith(&quot;.json&quot;)):
+        print(f&quot;Running simulation with config: {conf_path}&quot;)
+        resonator = RingResonator(config_file=conf_path)
+        resonator.run(resonator.run_resonance, store_ez=True)
+</code></pre>
+<h2 id="documentation">Documentation</h2>
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<a id="resonator_abstraction.meep_resonator.RingResonator"></a>
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="resonator_abstraction.meep_resonator.SimulationBase" href="../simbase/#resonator_abstraction.meep_resonator.SimulationBase">SimulationBase</a></code></p>
+
+
+        <p>Ring resonator simulation that offers the possibility to find resonances via Harminv
+simulations and later supports full system simulation after a resonance is identified.</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>resonator_abstraction/meep_resonator.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">532</span>
+<span class="normal">533</span>
+<span class="normal">534</span>
+<span class="normal">535</span>
+<span class="normal">536</span>
+<span class="normal">537</span>
+<span class="normal">538</span>
+<span class="normal">539</span>
+<span class="normal">540</span>
+<span class="normal">541</span>
+<span class="normal">542</span>
+<span class="normal">543</span>
+<span class="normal">544</span>
+<span class="normal">545</span>
+<span class="normal">546</span>
+<span class="normal">547</span>
+<span class="normal">548</span>
+<span class="normal">549</span>
+<span class="normal">550</span>
+<span class="normal">551</span>
+<span class="normal">552</span>
+<span class="normal">553</span>
+<span class="normal">554</span>
+<span class="normal">555</span>
+<span class="normal">556</span>
+<span class="normal">557</span>
+<span class="normal">558</span>
+<span class="normal">559</span>
+<span class="normal">560</span>
+<span class="normal">561</span>
+<span class="normal">562</span>
+<span class="normal">563</span>
+<span class="normal">564</span>
+<span class="normal">565</span>
+<span class="normal">566</span>
+<span class="normal">567</span>
+<span class="normal">568</span>
+<span class="normal">569</span>
+<span class="normal">570</span>
+<span class="normal">571</span>
+<span class="normal">572</span>
+<span class="normal">573</span>
+<span class="normal">574</span>
+<span class="normal">575</span>
+<span class="normal">576</span>
+<span class="normal">577</span>
+<span class="normal">578</span>
+<span class="normal">579</span>
+<span class="normal">580</span>
+<span class="normal">581</span>
+<span class="normal">582</span>
+<span class="normal">583</span>
+<span class="normal">584</span>
+<span class="normal">585</span>
+<span class="normal">586</span>
+<span class="normal">587</span>
+<span class="normal">588</span>
+<span class="normal">589</span>
+<span class="normal">590</span>
+<span class="normal">591</span>
+<span class="normal">592</span>
+<span class="normal">593</span>
+<span class="normal">594</span>
+<span class="normal">595</span>
+<span class="normal">596</span>
+<span class="normal">597</span>
+<span class="normal">598</span>
+<span class="normal">599</span>
+<span class="normal">600</span>
+<span class="normal">601</span>
+<span class="normal">602</span>
+<span class="normal">603</span>
+<span class="normal">604</span>
+<span class="normal">605</span>
+<span class="normal">606</span>
+<span class="normal">607</span>
+<span class="normal">608</span>
+<span class="normal">609</span>
+<span class="normal">610</span>
+<span class="normal">611</span>
+<span class="normal">612</span>
+<span class="normal">613</span>
+<span class="normal">614</span>
+<span class="normal">615</span>
+<span class="normal">616</span>
+<span class="normal">617</span>
+<span class="normal">618</span>
+<span class="normal">619</span>
+<span class="normal">620</span>
+<span class="normal">621</span>
+<span class="normal">622</span>
+<span class="normal">623</span>
+<span class="normal">624</span>
+<span class="normal">625</span>
+<span class="normal">626</span>
+<span class="normal">627</span>
+<span class="normal">628</span>
+<span class="normal">629</span>
+<span class="normal">630</span>
+<span class="normal">631</span>
+<span class="normal">632</span>
+<span class="normal">633</span>
+<span class="normal">634</span>
+<span class="normal">635</span>
+<span class="normal">636</span>
+<span class="normal">637</span>
+<span class="normal">638</span>
+<span class="normal">639</span>
+<span class="normal">640</span>
+<span class="normal">641</span>
+<span class="normal">642</span>
+<span class="normal">643</span>
+<span class="normal">644</span>
+<span class="normal">645</span>
+<span class="normal">646</span>
+<span class="normal">647</span>
+<span class="normal">648</span>
+<span class="normal">649</span>
+<span class="normal">650</span>
+<span class="normal">651</span>
+<span class="normal">652</span>
+<span class="normal">653</span>
+<span class="normal">654</span>
+<span class="normal">655</span>
+<span class="normal">656</span>
+<span class="normal">657</span>
+<span class="normal">658</span>
+<span class="normal">659</span>
+<span class="normal">660</span>
+<span class="normal">661</span>
+<span class="normal">662</span>
+<span class="normal">663</span>
+<span class="normal">664</span>
+<span class="normal">665</span>
+<span class="normal">666</span>
+<span class="normal">667</span>
+<span class="normal">668</span>
+<span class="normal">669</span>
+<span class="normal">670</span>
+<span class="normal">671</span>
+<span class="normal">672</span>
+<span class="normal">673</span>
+<span class="normal">674</span>
+<span class="normal">675</span>
+<span class="normal">676</span>
+<span class="normal">677</span>
+<span class="normal">678</span>
+<span class="normal">679</span>
+<span class="normal">680</span>
+<span class="normal">681</span>
+<span class="normal">682</span>
+<span class="normal">683</span>
+<span class="normal">684</span>
+<span class="normal">685</span>
+<span class="normal">686</span>
+<span class="normal">687</span>
+<span class="normal">688</span>
+<span class="normal">689</span>
+<span class="normal">690</span>
+<span class="normal">691</span>
+<span class="normal">692</span>
+<span class="normal">693</span>
+<span class="normal">694</span>
+<span class="normal">695</span>
+<span class="normal">696</span>
+<span class="normal">697</span>
+<span class="normal">698</span>
+<span class="normal">699</span>
+<span class="normal">700</span>
+<span class="normal">701</span>
+<span class="normal">702</span>
+<span class="normal">703</span>
+<span class="normal">704</span>
+<span class="normal">705</span>
+<span class="normal">706</span>
+<span class="normal">707</span>
+<span class="normal">708</span>
+<span class="normal">709</span>
+<span class="normal">710</span>
+<span class="normal">711</span>
+<span class="normal">712</span>
+<span class="normal">713</span>
+<span class="normal">714</span>
+<span class="normal">715</span>
+<span class="normal">716</span>
+<span class="normal">717</span>
+<span class="normal">718</span>
+<span class="normal">719</span>
+<span class="normal">720</span>
+<span class="normal">721</span>
+<span class="normal">722</span>
+<span class="normal">723</span>
+<span class="normal">724</span>
+<span class="normal">725</span>
+<span class="normal">726</span>
+<span class="normal">727</span>
+<span class="normal">728</span>
+<span class="normal">729</span>
+<span class="normal">730</span>
+<span class="normal">731</span>
+<span class="normal">732</span>
+<span class="normal">733</span>
+<span class="normal">734</span>
+<span class="normal">735</span>
+<span class="normal">736</span>
+<span class="normal">737</span>
+<span class="normal">738</span>
+<span class="normal">739</span>
+<span class="normal">740</span>
+<span class="normal">741</span>
+<span class="normal">742</span>
+<span class="normal">743</span>
+<span class="normal">744</span>
+<span class="normal">745</span>
+<span class="normal">746</span>
+<span class="normal">747</span>
+<span class="normal">748</span>
+<span class="normal">749</span>
+<span class="normal">750</span>
+<span class="normal">751</span>
+<span class="normal">752</span>
+<span class="normal">753</span>
+<span class="normal">754</span>
+<span class="normal">755</span>
+<span class="normal">756</span>
+<span class="normal">757</span>
+<span class="normal">758</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">RingResonator</span><span class="p">(</span><span class="n">SimulationBase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ring resonator simulation that offers the possibility to find resonances via Harminv</span>
+<span class="sd">    simulations and later supports full system simulation after a resonance is identified.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_file</span> <span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the ring resonator simulation by inheriting from SimulationBase.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            config_file (str): Path to the configuration file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">config_file</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resonance_frequency</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resonance_wavelength</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_resonances</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resonance_conf_path</span> <span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Runs a Harminv-based simulation to find resonances in the ring resonator. </span>
+<span class="sd">        The resonance frequency and wavelength are extracted and saved.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            resonance_conf_path (str): Path to save the updated simulation configuration file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">config_file</span><span class="p">:</span>
+                <span class="n">geometry_config</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">config_file</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">geom</span> <span class="ow">in</span> <span class="n">geometry_config</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">geom</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;mp.Cylinder&quot;</span> <span class="ow">and</span> <span class="n">geom</span><span class="p">[</span><span class="s2">&quot;radius&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;radius&quot;</span><span class="p">:</span> 
+                        <span class="n">center_x</span> <span class="o">=</span> <span class="n">parse_expression</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">base_vars</span><span class="p">,</span> <span class="n">geom</span><span class="p">[</span><span class="s2">&quot;center_x&quot;</span><span class="p">])</span>
+                        <span class="n">center_y</span> <span class="o">=</span> <span class="n">parse_expression</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">base_vars</span><span class="p">,</span> <span class="n">geom</span><span class="p">[</span><span class="s2">&quot;center_y&quot;</span><span class="p">])</span>
+                        <span class="n">center_z</span> <span class="o">=</span> <span class="n">parse_expression</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">base_vars</span><span class="p">,</span> <span class="n">geom</span><span class="p">[</span><span class="s2">&quot;center_z&quot;</span><span class="p">])</span>
+                        <span class="c1"># Offset the position to a point near the ring&#39;s outer edge</span>
+                        <span class="n">y_offset</span> <span class="o">=</span> <span class="n">parse_expression</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">base_vars</span><span class="p">,</span> <span class="n">geom</span><span class="p">[</span><span class="s2">&quot;radius&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_vars</span><span class="p">[</span><span class="s2">&quot;ring_width&quot;</span><span class="p">]</span>
+                        <span class="c1"># Create a Harminv object for resonance analysis</span>
+                        <span class="n">h</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">Harminv</span><span class="p">(</span>
+                            <span class="n">mp</span><span class="o">.</span><span class="n">Ez</span><span class="p">,</span> 
+                            <span class="n">mp</span><span class="o">.</span><span class="n">Vector3</span><span class="p">(</span><span class="n">center_x</span><span class="p">,</span> <span class="n">center_y</span> <span class="o">+</span> <span class="n">y_offset</span><span class="p">,</span> <span class="n">center_z</span><span class="p">),</span>
+                            <span class="n">fcen</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">base_vars</span><span class="p">[</span><span class="s2">&quot;fcen&quot;</span><span class="p">],</span>
+                            <span class="n">df</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">base_vars</span><span class="p">[</span><span class="s2">&quot;df&quot;</span><span class="p">]</span>
+                        <span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">sim</span><span class="o">.</span><span class="n">reset_meep</span><span class="p">()</span>
+                        <span class="c1"># Run the simulation and collect resonance data</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">progress_bar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">runtime</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Simulation Progress&quot;</span><span class="p">)</span>
+                        <span class="n">clear_cmd</span><span class="p">()</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+                            <span class="n">mp</span><span class="o">.</span><span class="n">at_beginning</span><span class="p">(</span><span class="n">mp</span><span class="o">.</span><span class="n">output_epsilon</span><span class="p">),</span>
+                            <span class="n">mp</span><span class="o">.</span><span class="n">after_sources</span><span class="p">(</span><span class="n">h</span><span class="p">),</span>
+                            <span class="n">mp</span><span class="o">.</span><span class="n">at_every</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">sim</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">progress_callback</span><span class="p">(</span><span class="n">sim</span><span class="p">)),</span>
+                            <span class="n">until_after_sources</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">runtime</span>
+                        <span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">progress_bar</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                        <span class="c1"># Log the detected resonances</span>
+                        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Resonances detected: </span><span class="si">{</span><span class="n">h</span><span class="o">.</span><span class="n">modes</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                        <span class="n">q</span> <span class="o">=</span> <span class="n">read_property_of_harminv</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="s2">&quot;Q&quot;</span><span class="p">)</span>
+                        <span class="n">resonances</span> <span class="o">=</span> <span class="n">read_property_of_harminv</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="s2">&quot;frequency&quot;</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">resonance_frequency</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_resonance_from_q_factor</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">resonances</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">resonance_wavelength</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">resonance_frequency</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">write_simulation_config</span><span class="p">(</span><span class="s2">&quot;conf_overcoupling.json&quot;</span><span class="p">,</span> <span class="n">resonance_conf_path</span><span class="p">)</span>
+                        <span class="c1">#self._append_to_config()</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error finding resonances: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_resonance_from_q_factor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qFactor</span><span class="p">,</span> <span class="n">resonances</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Determines the resonance frequency based on the Q factors returned by Harminv.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            qFactor (list): List of Q factor values.</span>
+<span class="sd">            resonances (list): Corresponding list of resonance frequencies.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: The selected resonance frequency.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Normalize Q factors</span>
+        <span class="n">max_q</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">qFactor</span><span class="p">)</span>
+        <span class="n">normalized_q</span> <span class="o">=</span> <span class="p">[</span><span class="n">q</span> <span class="o">/</span> <span class="n">max_q</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">qFactor</span><span class="p">]</span>
+
+        <span class="c1"># Filter modes with significant Q factors (e.g., &gt;50% of max Q)</span>
+        <span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="n">significant_indices</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">q</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">normalized_q</span><span class="p">)</span> <span class="k">if</span> <span class="n">q</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">]</span>
+        <span class="n">significant_resonances</span> <span class="o">=</span> <span class="p">[</span><span class="n">resonances</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">significant_indices</span><span class="p">]</span>
+        <span class="n">significant_q</span> <span class="o">=</span> <span class="p">[</span><span class="n">qFactor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">significant_indices</span><span class="p">]</span>
+
+        <span class="c1"># Fit Gaussian to the significant Q factors</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">significant_resonances</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>  <span class="c1"># Need at least 3 points for a meaningful fit</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Perform curve fitting</span>
+                <span class="n">popt</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">gaussian</span><span class="p">,</span> <span class="n">significant_resonances</span><span class="p">,</span> <span class="n">significant_q</span><span class="p">,</span> <span class="n">p0</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">resonances</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">qFactor</span><span class="p">)],</span> <span class="mf">0.1</span><span class="p">])</span>
+                <span class="n">fitted_amp</span><span class="p">,</span> <span class="n">fitted_mean</span><span class="p">,</span> <span class="n">fitted_std</span> <span class="o">=</span> <span class="n">popt</span>
+
+                <span class="c1"># Plot the Q factors and Gaussian fit</span>
+                <span class="n">x_fit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">significant_resonances</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">significant_resonances</span><span class="p">),</span> <span class="mi">500</span><span class="p">)</span>
+                <span class="n">y_fit</span> <span class="o">=</span> <span class="n">gaussian</span><span class="p">(</span><span class="n">x_fit</span><span class="p">,</span> <span class="o">*</span><span class="n">popt</span><span class="p">)</span>
+
+                <span class="c1"># Choose the frequency corresponding to the Gaussian mean</span>
+                <span class="n">chosen_frequency</span> <span class="o">=</span> <span class="n">fitted_mean</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Chosen frequency based on Gaussian fit: </span><span class="si">{</span><span class="n">chosen_frequency</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">chosen_frequency</span>
+            <span class="k">except</span> <span class="ne">RuntimeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Gaussian fit failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">chosen_frequency</span> <span class="o">=</span> <span class="n">resonances</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">qFactor</span><span class="p">)]</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Defaulting to frequency with highest Q factor: </span><span class="si">{</span><span class="n">chosen_frequency</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">chosen_frequency</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Default to highest Q factor if Gaussian fit is not viable</span>
+            <span class="n">chosen_frequency</span> <span class="o">=</span> <span class="n">resonances</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">qFactor</span><span class="p">)]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Chosen frequency with highest Q factor: </span><span class="si">{</span><span class="n">chosen_frequency</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">chosen_frequency</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">write_simulation_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_config_file</span> <span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">new_file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Updates the resonance wavelength in the &#39;base_vars&#39; of the given configuration file</span>
+<span class="sd">        and writes the modified configuration to a new file.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            base_config_file (str): Path to the base configuration file.</span>
+<span class="sd">            new_file_name (str): Path to save the updated configuration.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Load the existing configuration</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">base_config_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">config</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+            <span class="c1"># Update the resonance wavelength in base_vars</span>
+            <span class="k">if</span> <span class="s2">&quot;base_vars&quot;</span> <span class="ow">in</span> <span class="n">config</span><span class="p">:</span>
+                <span class="n">config</span><span class="p">[</span><span class="s2">&quot;base_vars&quot;</span><span class="p">][</span><span class="s2">&quot;wavelength&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">resonance_wavelength</span>
+                <span class="c1"># this should not be constant but idk what a dynamic value might be, so it stays</span>
+                <span class="n">config</span><span class="p">[</span><span class="s2">&quot;base_vars&quot;</span><span class="p">][</span><span class="s2">&quot;df&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.02</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">&quot;The &#39;base_vars&#39; section is missing in the configuration file.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s2">&quot;source_file&quot;</span> <span class="ow">in</span> <span class="n">config</span><span class="p">:</span>
+                <span class="n">config</span><span class="p">[</span><span class="s2">&quot;source_file&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;simulation_sources.json&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">&quot;The &#39;source_file&#39; section is missing in the configuration file.&quot;</span><span class="p">)</span>
+            <span class="c1"># Recompute derived_base_vars if it exists</span>
+            <span class="k">if</span> <span class="s2">&quot;derived_base_vars&quot;</span> <span class="ow">in</span> <span class="n">config</span> <span class="ow">and</span> <span class="s2">&quot;fcen&quot;</span> <span class="ow">in</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;derived_base_vars&quot;</span><span class="p">]:</span>
+                <span class="n">config</span><span class="p">[</span><span class="s2">&quot;derived_base_vars&quot;</span><span class="p">][</span><span class="s2">&quot;fcen&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;1/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">resonance_wavelength</span><span class="si">}</span><span class="s2">&quot;</span>
+
+            <span class="c1"># Save the updated configuration back to the file</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">new_file_name</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Configuration updated successfully. New wavelength: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">resonance_wavelength</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: File </span><span class="si">{</span><span class="n">base_config_file</span><span class="si">}</span><span class="s2"> not found.&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: Missing key in configuration: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;An unexpected error occurred: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">run_resonance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">save_ez</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Runs a full simulation using the previously determined resonance frequency.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            save_ez (bool, optional): Whether to save the Ez field data. Defaults to False.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># TODO: if the resonance has been run already: ask if it should be rerun</span>
+
+        <span class="c1"># check if the source is the correct </span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sources_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">sources</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+                <span class="c1"># allows to run the simulation ONLY if we&#39;re loading the correct sources - else aborts</span>
+                <span class="n">valid_simulation_sources</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span> <span class="k">for</span> <span class="n">source</span> <span class="ow">in</span> <span class="n">sources</span> <span class="k">if</span> <span class="n">source</span><span class="p">[</span><span class="s2">&quot;usage&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;simulation&quot;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">valid_simulation_sources</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">sources</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sources</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)):</span>
+                    <span class="n">clear_cmd</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">progress_bar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">runtime</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Simulation Progress&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">mp</span><span class="o">.</span><span class="n">at_beginning</span><span class="p">(</span><span class="n">mp</span><span class="o">.</span><span class="n">output_epsilon</span><span class="p">),</span>
+                                 <span class="n">mp</span><span class="o">.</span><span class="n">to_appended</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config_file</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">mp</span><span class="o">.</span><span class="n">at_every</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">sim</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">progress_callback</span><span class="p">(</span><span class="n">sim</span><span class="p">))),</span>
+                                 <span class="n">until</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">runtime</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">progress_bar</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                    <span class="c1"># save ez to a file</span>
+                    <span class="n">safe_file</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+                    <span class="k">if</span> <span class="n">save_ez</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+                        <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">config_file</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">):</span>
+                            <span class="k">if</span> <span class="n">elem</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config_file</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                                <span class="n">safe_file</span> <span class="o">+=</span> <span class="n">elem</span>
+                                <span class="n">safe_file</span> <span class="o">+=</span> <span class="s2">&quot;.&quot;</span>
+                        <span class="n">safe_file</span> <span class="o">=</span> <span class="s2">&quot;ez_&quot;</span> <span class="o">+</span> <span class="n">safe_file</span> <span class="o">+</span> <span class="s2">&quot;csv&quot;</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_waveguide_ez_field_save</span><span class="p">(</span><span class="n">safe_file</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Check </span><span class="si">{}</span><span class="s2">! Not all source are having the right usage&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sources_path</span><span class="p">))</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">FileExistsError</span><span class="p">(</span><span class="s2">&quot;File </span><span class="si">{}</span><span class="s2"> does not exist&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sources_path</span><span class="p">))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">plot_field_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">slice</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Plots the Ez field result using a vertical slice of the simulation domain.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            slice (tuple): A tuple specifying the start and end indices along the y-axis.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ez_field</span><span class="p">[</span><span class="nb">slice</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="nb">slice</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">plot_coupling</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plot_params_guess</span><span class="o">=</span><span class="p">[</span><span class="mf">0.08</span><span class="p">,</span><span class="mf">0.3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="nb">slice</span><span class="o">=</span><span class="mi">90</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fits a sinusoidal curve to the wavefront along the linear waveguide and plots the results.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            plot_params_guess (list, optional): Initial guess for the sinusoidal fitting parameters.</span>
+<span class="sd">            slice (int, optional): Y-axis index corresponding to the waveguide cross-section.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ez_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_waveguide_ez_field</span><span class="p">()</span> <span class="c1">#self.sim.get_array(center=mp.Vector3(), size=self.simulation_domain, component=mp.Ez)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ez_data</span><span class="o">.</span><span class="n">transpose</span><span class="p">()[</span><span class="nb">slice</span><span class="p">],</span>  <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;simulation&quot;</span><span class="p">)</span>
+        <span class="n">xdata_start</span><span class="o">=</span> <span class="mi">250</span>
+        <span class="n">xdata_end</span> <span class="o">=</span> <span class="mi">370</span>
+        <span class="n">ydata</span> <span class="o">=</span> <span class="n">ez_data</span><span class="o">.</span><span class="n">transpose</span><span class="p">()[</span><span class="mi">90</span><span class="p">]</span><span class="c1">#[xdata_start:xdata_end]</span>
+        <span class="n">xdata</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">ydata</span><span class="p">))</span><span class="c1">#np.arange(xdata_start, xdata_end)</span>
+        <span class="n">guess</span> <span class="o">=</span> <span class="n">plot_params_guess</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">popt</span><span class="p">,</span> <span class="n">pcov</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">sinus</span><span class="p">,</span> <span class="n">xdata</span><span class="p">,</span> <span class="n">ydata</span><span class="p">,</span> <span class="n">p0</span><span class="o">=</span><span class="n">guess</span><span class="p">)</span>
+            <span class="n">fit_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">ez_data</span><span class="o">.</span><span class="n">transpose</span><span class="p">()[</span><span class="mi">90</span><span class="p">]))</span>
+            <span class="c1">#plt.plot(fit_x, sinus(fit_x, *popt), label=&quot;extrapolation&quot;)</span>
+            <span class="c1">#plt.plot(xdata, ydata, label=&#39;fit range&#39;)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;No fit found&quot;</span><span class="p">)</span>
+            <span class="c1">#plt.plot(xdata, ydata, label=&#39;fit range&#39;)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;distance along linear waveguide [arb. u.]&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;intensity of e field [arb. u.]&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="resonator_abstraction.meep_resonator.RingResonator.__init__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">config_file</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Initializes the ring resonator simulation by inheriting from SimulationBase.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>config_file</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Path to the configuration file.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="quote">
+              <summary>Source code in <code>resonator_abstraction/meep_resonator.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">537</span>
+<span class="normal">538</span>
+<span class="normal">539</span>
+<span class="normal">540</span>
+<span class="normal">541</span>
+<span class="normal">542</span>
+<span class="normal">543</span>
+<span class="normal">544</span>
+<span class="normal">545</span>
+<span class="normal">546</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_file</span> <span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Initializes the ring resonator simulation by inheriting from SimulationBase.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        config_file (str): Path to the configuration file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">config_file</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">resonance_frequency</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">resonance_wavelength</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="resonator_abstraction.meep_resonator.RingResonator.find_resonances" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">find_resonances</span><span class="p">(</span><span class="n">resonance_conf_path</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Runs a Harminv-based simulation to find resonances in the ring resonator. 
+The resonance frequency and wavelength are extracted and saved.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>resonance_conf_path</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Path to save the updated simulation configuration file.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="quote">
+              <summary>Source code in <code>resonator_abstraction/meep_resonator.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">548</span>
+<span class="normal">549</span>
+<span class="normal">550</span>
+<span class="normal">551</span>
+<span class="normal">552</span>
+<span class="normal">553</span>
+<span class="normal">554</span>
+<span class="normal">555</span>
+<span class="normal">556</span>
+<span class="normal">557</span>
+<span class="normal">558</span>
+<span class="normal">559</span>
+<span class="normal">560</span>
+<span class="normal">561</span>
+<span class="normal">562</span>
+<span class="normal">563</span>
+<span class="normal">564</span>
+<span class="normal">565</span>
+<span class="normal">566</span>
+<span class="normal">567</span>
+<span class="normal">568</span>
+<span class="normal">569</span>
+<span class="normal">570</span>
+<span class="normal">571</span>
+<span class="normal">572</span>
+<span class="normal">573</span>
+<span class="normal">574</span>
+<span class="normal">575</span>
+<span class="normal">576</span>
+<span class="normal">577</span>
+<span class="normal">578</span>
+<span class="normal">579</span>
+<span class="normal">580</span>
+<span class="normal">581</span>
+<span class="normal">582</span>
+<span class="normal">583</span>
+<span class="normal">584</span>
+<span class="normal">585</span>
+<span class="normal">586</span>
+<span class="normal">587</span>
+<span class="normal">588</span>
+<span class="normal">589</span>
+<span class="normal">590</span>
+<span class="normal">591</span>
+<span class="normal">592</span>
+<span class="normal">593</span>
+<span class="normal">594</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">find_resonances</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resonance_conf_path</span> <span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runs a Harminv-based simulation to find resonances in the ring resonator. </span>
+<span class="sd">    The resonance frequency and wavelength are extracted and saved.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        resonance_conf_path (str): Path to save the updated simulation configuration file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">config_file</span><span class="p">:</span>
+            <span class="n">geometry_config</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">config_file</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">geom</span> <span class="ow">in</span> <span class="n">geometry_config</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">geom</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;mp.Cylinder&quot;</span> <span class="ow">and</span> <span class="n">geom</span><span class="p">[</span><span class="s2">&quot;radius&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;radius&quot;</span><span class="p">:</span> 
+                    <span class="n">center_x</span> <span class="o">=</span> <span class="n">parse_expression</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">base_vars</span><span class="p">,</span> <span class="n">geom</span><span class="p">[</span><span class="s2">&quot;center_x&quot;</span><span class="p">])</span>
+                    <span class="n">center_y</span> <span class="o">=</span> <span class="n">parse_expression</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">base_vars</span><span class="p">,</span> <span class="n">geom</span><span class="p">[</span><span class="s2">&quot;center_y&quot;</span><span class="p">])</span>
+                    <span class="n">center_z</span> <span class="o">=</span> <span class="n">parse_expression</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">base_vars</span><span class="p">,</span> <span class="n">geom</span><span class="p">[</span><span class="s2">&quot;center_z&quot;</span><span class="p">])</span>
+                    <span class="c1"># Offset the position to a point near the ring&#39;s outer edge</span>
+                    <span class="n">y_offset</span> <span class="o">=</span> <span class="n">parse_expression</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">base_vars</span><span class="p">,</span> <span class="n">geom</span><span class="p">[</span><span class="s2">&quot;radius&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_vars</span><span class="p">[</span><span class="s2">&quot;ring_width&quot;</span><span class="p">]</span>
+                    <span class="c1"># Create a Harminv object for resonance analysis</span>
+                    <span class="n">h</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">Harminv</span><span class="p">(</span>
+                        <span class="n">mp</span><span class="o">.</span><span class="n">Ez</span><span class="p">,</span> 
+                        <span class="n">mp</span><span class="o">.</span><span class="n">Vector3</span><span class="p">(</span><span class="n">center_x</span><span class="p">,</span> <span class="n">center_y</span> <span class="o">+</span> <span class="n">y_offset</span><span class="p">,</span> <span class="n">center_z</span><span class="p">),</span>
+                        <span class="n">fcen</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">base_vars</span><span class="p">[</span><span class="s2">&quot;fcen&quot;</span><span class="p">],</span>
+                        <span class="n">df</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">base_vars</span><span class="p">[</span><span class="s2">&quot;df&quot;</span><span class="p">]</span>
+                    <span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">sim</span><span class="o">.</span><span class="n">reset_meep</span><span class="p">()</span>
+                    <span class="c1"># Run the simulation and collect resonance data</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">progress_bar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">runtime</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Simulation Progress&quot;</span><span class="p">)</span>
+                    <span class="n">clear_cmd</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+                        <span class="n">mp</span><span class="o">.</span><span class="n">at_beginning</span><span class="p">(</span><span class="n">mp</span><span class="o">.</span><span class="n">output_epsilon</span><span class="p">),</span>
+                        <span class="n">mp</span><span class="o">.</span><span class="n">after_sources</span><span class="p">(</span><span class="n">h</span><span class="p">),</span>
+                        <span class="n">mp</span><span class="o">.</span><span class="n">at_every</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">sim</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">progress_callback</span><span class="p">(</span><span class="n">sim</span><span class="p">)),</span>
+                        <span class="n">until_after_sources</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">runtime</span>
+                    <span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">progress_bar</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                    <span class="c1"># Log the detected resonances</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Resonances detected: </span><span class="si">{</span><span class="n">h</span><span class="o">.</span><span class="n">modes</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="n">q</span> <span class="o">=</span> <span class="n">read_property_of_harminv</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="s2">&quot;Q&quot;</span><span class="p">)</span>
+                    <span class="n">resonances</span> <span class="o">=</span> <span class="n">read_property_of_harminv</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="s2">&quot;frequency&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">resonance_frequency</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_resonance_from_q_factor</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">resonances</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">resonance_wavelength</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">resonance_frequency</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">write_simulation_config</span><span class="p">(</span><span class="s2">&quot;conf_overcoupling.json&quot;</span><span class="p">,</span> <span class="n">resonance_conf_path</span><span class="p">)</span>
+                    <span class="c1">#self._append_to_config()</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error finding resonances: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="resonator_abstraction.meep_resonator.RingResonator.get_resonance_from_q_factor" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_resonance_from_q_factor</span><span class="p">(</span><span class="n">qFactor</span><span class="p">,</span> <span class="n">resonances</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Determines the resonance frequency based on the Q factors returned by Harminv.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>qFactor</code>
+            </td>
+            <td>
+                  <code><span title="list">list</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List of Q factor values.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>resonances</code>
+            </td>
+            <td>
+                  <code><span title="list">list</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Corresponding list of resonance frequencies.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>float</code></td>            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The selected resonance frequency.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="quote">
+              <summary>Source code in <code>resonator_abstraction/meep_resonator.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">596</span>
+<span class="normal">597</span>
+<span class="normal">598</span>
+<span class="normal">599</span>
+<span class="normal">600</span>
+<span class="normal">601</span>
+<span class="normal">602</span>
+<span class="normal">603</span>
+<span class="normal">604</span>
+<span class="normal">605</span>
+<span class="normal">606</span>
+<span class="normal">607</span>
+<span class="normal">608</span>
+<span class="normal">609</span>
+<span class="normal">610</span>
+<span class="normal">611</span>
+<span class="normal">612</span>
+<span class="normal">613</span>
+<span class="normal">614</span>
+<span class="normal">615</span>
+<span class="normal">616</span>
+<span class="normal">617</span>
+<span class="normal">618</span>
+<span class="normal">619</span>
+<span class="normal">620</span>
+<span class="normal">621</span>
+<span class="normal">622</span>
+<span class="normal">623</span>
+<span class="normal">624</span>
+<span class="normal">625</span>
+<span class="normal">626</span>
+<span class="normal">627</span>
+<span class="normal">628</span>
+<span class="normal">629</span>
+<span class="normal">630</span>
+<span class="normal">631</span>
+<span class="normal">632</span>
+<span class="normal">633</span>
+<span class="normal">634</span>
+<span class="normal">635</span>
+<span class="normal">636</span>
+<span class="normal">637</span>
+<span class="normal">638</span>
+<span class="normal">639</span>
+<span class="normal">640</span>
+<span class="normal">641</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_resonance_from_q_factor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qFactor</span><span class="p">,</span> <span class="n">resonances</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Determines the resonance frequency based on the Q factors returned by Harminv.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        qFactor (list): List of Q factor values.</span>
+<span class="sd">        resonances (list): Corresponding list of resonance frequencies.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: The selected resonance frequency.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Normalize Q factors</span>
+    <span class="n">max_q</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">qFactor</span><span class="p">)</span>
+    <span class="n">normalized_q</span> <span class="o">=</span> <span class="p">[</span><span class="n">q</span> <span class="o">/</span> <span class="n">max_q</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">qFactor</span><span class="p">]</span>
+
+    <span class="c1"># Filter modes with significant Q factors (e.g., &gt;50% of max Q)</span>
+    <span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="n">significant_indices</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">q</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">normalized_q</span><span class="p">)</span> <span class="k">if</span> <span class="n">q</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">]</span>
+    <span class="n">significant_resonances</span> <span class="o">=</span> <span class="p">[</span><span class="n">resonances</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">significant_indices</span><span class="p">]</span>
+    <span class="n">significant_q</span> <span class="o">=</span> <span class="p">[</span><span class="n">qFactor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">significant_indices</span><span class="p">]</span>
+
+    <span class="c1"># Fit Gaussian to the significant Q factors</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">significant_resonances</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>  <span class="c1"># Need at least 3 points for a meaningful fit</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Perform curve fitting</span>
+            <span class="n">popt</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">gaussian</span><span class="p">,</span> <span class="n">significant_resonances</span><span class="p">,</span> <span class="n">significant_q</span><span class="p">,</span> <span class="n">p0</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">resonances</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">qFactor</span><span class="p">)],</span> <span class="mf">0.1</span><span class="p">])</span>
+            <span class="n">fitted_amp</span><span class="p">,</span> <span class="n">fitted_mean</span><span class="p">,</span> <span class="n">fitted_std</span> <span class="o">=</span> <span class="n">popt</span>
+
+            <span class="c1"># Plot the Q factors and Gaussian fit</span>
+            <span class="n">x_fit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">significant_resonances</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">significant_resonances</span><span class="p">),</span> <span class="mi">500</span><span class="p">)</span>
+            <span class="n">y_fit</span> <span class="o">=</span> <span class="n">gaussian</span><span class="p">(</span><span class="n">x_fit</span><span class="p">,</span> <span class="o">*</span><span class="n">popt</span><span class="p">)</span>
+
+            <span class="c1"># Choose the frequency corresponding to the Gaussian mean</span>
+            <span class="n">chosen_frequency</span> <span class="o">=</span> <span class="n">fitted_mean</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Chosen frequency based on Gaussian fit: </span><span class="si">{</span><span class="n">chosen_frequency</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">chosen_frequency</span>
+        <span class="k">except</span> <span class="ne">RuntimeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Gaussian fit failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">chosen_frequency</span> <span class="o">=</span> <span class="n">resonances</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">qFactor</span><span class="p">)]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Defaulting to frequency with highest Q factor: </span><span class="si">{</span><span class="n">chosen_frequency</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">chosen_frequency</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Default to highest Q factor if Gaussian fit is not viable</span>
+        <span class="n">chosen_frequency</span> <span class="o">=</span> <span class="n">resonances</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">qFactor</span><span class="p">)]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Chosen frequency with highest Q factor: </span><span class="si">{</span><span class="n">chosen_frequency</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">chosen_frequency</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="resonator_abstraction.meep_resonator.RingResonator.plot_coupling" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">plot_coupling</span><span class="p">(</span><span class="n">plot_params_guess</span><span class="o">=</span><span class="p">[</span><span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="nb">slice</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Fits a sinusoidal curve to the wavefront along the linear waveguide and plots the results.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>plot_params_guess</code>
+            </td>
+            <td>
+                  <code><span title="list">list</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Initial guess for the sinusoidal fitting parameters.</p>
+              </div>
+            </td>
+            <td>
+                  <code>[0.08, 0.3, 5]</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>slice</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Y-axis index corresponding to the waveguide cross-section.</p>
+              </div>
+            </td>
+            <td>
+                  <code>90</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="quote">
+              <summary>Source code in <code>resonator_abstraction/meep_resonator.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">731</span>
+<span class="normal">732</span>
+<span class="normal">733</span>
+<span class="normal">734</span>
+<span class="normal">735</span>
+<span class="normal">736</span>
+<span class="normal">737</span>
+<span class="normal">738</span>
+<span class="normal">739</span>
+<span class="normal">740</span>
+<span class="normal">741</span>
+<span class="normal">742</span>
+<span class="normal">743</span>
+<span class="normal">744</span>
+<span class="normal">745</span>
+<span class="normal">746</span>
+<span class="normal">747</span>
+<span class="normal">748</span>
+<span class="normal">749</span>
+<span class="normal">750</span>
+<span class="normal">751</span>
+<span class="normal">752</span>
+<span class="normal">753</span>
+<span class="normal">754</span>
+<span class="normal">755</span>
+<span class="normal">756</span>
+<span class="normal">757</span>
+<span class="normal">758</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">plot_coupling</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plot_params_guess</span><span class="o">=</span><span class="p">[</span><span class="mf">0.08</span><span class="p">,</span><span class="mf">0.3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="nb">slice</span><span class="o">=</span><span class="mi">90</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Fits a sinusoidal curve to the wavefront along the linear waveguide and plots the results.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        plot_params_guess (list, optional): Initial guess for the sinusoidal fitting parameters.</span>
+<span class="sd">        slice (int, optional): Y-axis index corresponding to the waveguide cross-section.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ez_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_waveguide_ez_field</span><span class="p">()</span> <span class="c1">#self.sim.get_array(center=mp.Vector3(), size=self.simulation_domain, component=mp.Ez)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ez_data</span><span class="o">.</span><span class="n">transpose</span><span class="p">()[</span><span class="nb">slice</span><span class="p">],</span>  <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;simulation&quot;</span><span class="p">)</span>
+    <span class="n">xdata_start</span><span class="o">=</span> <span class="mi">250</span>
+    <span class="n">xdata_end</span> <span class="o">=</span> <span class="mi">370</span>
+    <span class="n">ydata</span> <span class="o">=</span> <span class="n">ez_data</span><span class="o">.</span><span class="n">transpose</span><span class="p">()[</span><span class="mi">90</span><span class="p">]</span><span class="c1">#[xdata_start:xdata_end]</span>
+    <span class="n">xdata</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">ydata</span><span class="p">))</span><span class="c1">#np.arange(xdata_start, xdata_end)</span>
+    <span class="n">guess</span> <span class="o">=</span> <span class="n">plot_params_guess</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">popt</span><span class="p">,</span> <span class="n">pcov</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">sinus</span><span class="p">,</span> <span class="n">xdata</span><span class="p">,</span> <span class="n">ydata</span><span class="p">,</span> <span class="n">p0</span><span class="o">=</span><span class="n">guess</span><span class="p">)</span>
+        <span class="n">fit_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">ez_data</span><span class="o">.</span><span class="n">transpose</span><span class="p">()[</span><span class="mi">90</span><span class="p">]))</span>
+        <span class="c1">#plt.plot(fit_x, sinus(fit_x, *popt), label=&quot;extrapolation&quot;)</span>
+        <span class="c1">#plt.plot(xdata, ydata, label=&#39;fit range&#39;)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;No fit found&quot;</span><span class="p">)</span>
+        <span class="c1">#plt.plot(xdata, ydata, label=&#39;fit range&#39;)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;distance along linear waveguide [arb. u.]&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;intensity of e field [arb. u.]&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="resonator_abstraction.meep_resonator.RingResonator.plot_field_result" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">plot_field_result</span><span class="p">(</span><span class="nb">slice</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Plots the Ez field result using a vertical slice of the simulation domain.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>slice</code>
+            </td>
+            <td>
+                  <code><span title="tuple">tuple</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A tuple specifying the start and end indices along the y-axis.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="quote">
+              <summary>Source code in <code>resonator_abstraction/meep_resonator.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">721</span>
+<span class="normal">722</span>
+<span class="normal">723</span>
+<span class="normal">724</span>
+<span class="normal">725</span>
+<span class="normal">726</span>
+<span class="normal">727</span>
+<span class="normal">728</span>
+<span class="normal">729</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">plot_field_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">slice</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plots the Ez field result using a vertical slice of the simulation domain.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        slice (tuple): A tuple specifying the start and end indices along the y-axis.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ez_field</span><span class="p">[</span><span class="nb">slice</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="nb">slice</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="resonator_abstraction.meep_resonator.RingResonator.run_resonance" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">run_resonance</span><span class="p">(</span><span class="n">save_ez</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Runs a full simulation using the previously determined resonance frequency.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>save_ez</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Whether to save the Ez field data. Defaults to False.</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="quote">
+              <summary>Source code in <code>resonator_abstraction/meep_resonator.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">685</span>
+<span class="normal">686</span>
+<span class="normal">687</span>
+<span class="normal">688</span>
+<span class="normal">689</span>
+<span class="normal">690</span>
+<span class="normal">691</span>
+<span class="normal">692</span>
+<span class="normal">693</span>
+<span class="normal">694</span>
+<span class="normal">695</span>
+<span class="normal">696</span>
+<span class="normal">697</span>
+<span class="normal">698</span>
+<span class="normal">699</span>
+<span class="normal">700</span>
+<span class="normal">701</span>
+<span class="normal">702</span>
+<span class="normal">703</span>
+<span class="normal">704</span>
+<span class="normal">705</span>
+<span class="normal">706</span>
+<span class="normal">707</span>
+<span class="normal">708</span>
+<span class="normal">709</span>
+<span class="normal">710</span>
+<span class="normal">711</span>
+<span class="normal">712</span>
+<span class="normal">713</span>
+<span class="normal">714</span>
+<span class="normal">715</span>
+<span class="normal">716</span>
+<span class="normal">717</span>
+<span class="normal">718</span>
+<span class="normal">719</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">run_resonance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">save_ez</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runs a full simulation using the previously determined resonance frequency.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        save_ez (bool, optional): Whether to save the Ez field data. Defaults to False.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO: if the resonance has been run already: ask if it should be rerun</span>
+
+    <span class="c1"># check if the source is the correct </span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sources_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">sources</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="c1"># allows to run the simulation ONLY if we&#39;re loading the correct sources - else aborts</span>
+            <span class="n">valid_simulation_sources</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span> <span class="k">for</span> <span class="n">source</span> <span class="ow">in</span> <span class="n">sources</span> <span class="k">if</span> <span class="n">source</span><span class="p">[</span><span class="s2">&quot;usage&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;simulation&quot;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">valid_simulation_sources</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">sources</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sources</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)):</span>
+                <span class="n">clear_cmd</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">progress_bar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">runtime</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Simulation Progress&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">mp</span><span class="o">.</span><span class="n">at_beginning</span><span class="p">(</span><span class="n">mp</span><span class="o">.</span><span class="n">output_epsilon</span><span class="p">),</span>
+                             <span class="n">mp</span><span class="o">.</span><span class="n">to_appended</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config_file</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">mp</span><span class="o">.</span><span class="n">at_every</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">sim</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">progress_callback</span><span class="p">(</span><span class="n">sim</span><span class="p">))),</span>
+                             <span class="n">until</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">runtime</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">progress_bar</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                <span class="c1"># save ez to a file</span>
+                <span class="n">safe_file</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+                <span class="k">if</span> <span class="n">save_ez</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">config_file</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">):</span>
+                        <span class="k">if</span> <span class="n">elem</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config_file</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                            <span class="n">safe_file</span> <span class="o">+=</span> <span class="n">elem</span>
+                            <span class="n">safe_file</span> <span class="o">+=</span> <span class="s2">&quot;.&quot;</span>
+                    <span class="n">safe_file</span> <span class="o">=</span> <span class="s2">&quot;ez_&quot;</span> <span class="o">+</span> <span class="n">safe_file</span> <span class="o">+</span> <span class="s2">&quot;csv&quot;</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_waveguide_ez_field_save</span><span class="p">(</span><span class="n">safe_file</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Check </span><span class="si">{}</span><span class="s2">! Not all source are having the right usage&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sources_path</span><span class="p">))</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">FileExistsError</span><span class="p">(</span><span class="s2">&quot;File </span><span class="si">{}</span><span class="s2"> does not exist&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sources_path</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="resonator_abstraction.meep_resonator.RingResonator.write_simulation_config" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">write_simulation_config</span><span class="p">(</span><span class="n">base_config_file</span><span class="p">,</span> <span class="n">new_file_name</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Updates the resonance wavelength in the 'base_vars' of the given configuration file
+and writes the modified configuration to a new file.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>base_config_file</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Path to the base configuration file.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>new_file_name</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Path to save the updated configuration.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="quote">
+              <summary>Source code in <code>resonator_abstraction/meep_resonator.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">643</span>
+<span class="normal">644</span>
+<span class="normal">645</span>
+<span class="normal">646</span>
+<span class="normal">647</span>
+<span class="normal">648</span>
+<span class="normal">649</span>
+<span class="normal">650</span>
+<span class="normal">651</span>
+<span class="normal">652</span>
+<span class="normal">653</span>
+<span class="normal">654</span>
+<span class="normal">655</span>
+<span class="normal">656</span>
+<span class="normal">657</span>
+<span class="normal">658</span>
+<span class="normal">659</span>
+<span class="normal">660</span>
+<span class="normal">661</span>
+<span class="normal">662</span>
+<span class="normal">663</span>
+<span class="normal">664</span>
+<span class="normal">665</span>
+<span class="normal">666</span>
+<span class="normal">667</span>
+<span class="normal">668</span>
+<span class="normal">669</span>
+<span class="normal">670</span>
+<span class="normal">671</span>
+<span class="normal">672</span>
+<span class="normal">673</span>
+<span class="normal">674</span>
+<span class="normal">675</span>
+<span class="normal">676</span>
+<span class="normal">677</span>
+<span class="normal">678</span>
+<span class="normal">679</span>
+<span class="normal">680</span>
+<span class="normal">681</span>
+<span class="normal">682</span>
+<span class="normal">683</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">write_simulation_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_config_file</span> <span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">new_file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Updates the resonance wavelength in the &#39;base_vars&#39; of the given configuration file</span>
+<span class="sd">    and writes the modified configuration to a new file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        base_config_file (str): Path to the base configuration file.</span>
+<span class="sd">        new_file_name (str): Path to save the updated configuration.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Load the existing configuration</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">base_config_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">config</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+        <span class="c1"># Update the resonance wavelength in base_vars</span>
+        <span class="k">if</span> <span class="s2">&quot;base_vars&quot;</span> <span class="ow">in</span> <span class="n">config</span><span class="p">:</span>
+            <span class="n">config</span><span class="p">[</span><span class="s2">&quot;base_vars&quot;</span><span class="p">][</span><span class="s2">&quot;wavelength&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">resonance_wavelength</span>
+            <span class="c1"># this should not be constant but idk what a dynamic value might be, so it stays</span>
+            <span class="n">config</span><span class="p">[</span><span class="s2">&quot;base_vars&quot;</span><span class="p">][</span><span class="s2">&quot;df&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.02</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">&quot;The &#39;base_vars&#39; section is missing in the configuration file.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s2">&quot;source_file&quot;</span> <span class="ow">in</span> <span class="n">config</span><span class="p">:</span>
+            <span class="n">config</span><span class="p">[</span><span class="s2">&quot;source_file&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;simulation_sources.json&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">&quot;The &#39;source_file&#39; section is missing in the configuration file.&quot;</span><span class="p">)</span>
+        <span class="c1"># Recompute derived_base_vars if it exists</span>
+        <span class="k">if</span> <span class="s2">&quot;derived_base_vars&quot;</span> <span class="ow">in</span> <span class="n">config</span> <span class="ow">and</span> <span class="s2">&quot;fcen&quot;</span> <span class="ow">in</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;derived_base_vars&quot;</span><span class="p">]:</span>
+            <span class="n">config</span><span class="p">[</span><span class="s2">&quot;derived_base_vars&quot;</span><span class="p">][</span><span class="s2">&quot;fcen&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;1/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">resonance_wavelength</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="c1"># Save the updated configuration back to the file</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">new_file_name</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Configuration updated successfully. New wavelength: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">resonance_wavelength</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: File </span><span class="si">{</span><span class="n">base_config_file</span><span class="si">}</span><span class="s2"> not found.&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: Missing key in configuration: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;An unexpected error occurred: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

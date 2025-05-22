@@ -1,0 +1,1386 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../ringresonator/">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Linear Waveguide - SQEALI</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#linear-waveguide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="SQEALI" class="md-header__button md-logo" aria-label="SQEALI" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SQEALI
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Linear Waveguide
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="SQEALI" class="md-nav__button md-logo" aria-label="SQEALI" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SQEALI
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../simbase/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Simulation Base
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ringresonator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ring Resonator
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Linear Waveguide
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linear Waveguide
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#base-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Base Variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geometry" class="md-nav__link">
+    <span class="md-ellipsis">
+      Geometry
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#source" class="md-nav__link">
+    <span class="md-ellipsis">
+      Source
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Flux
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example script
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Documentation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resonator_abstraction.meep_resonator.LinearWaveguides" class="md-nav__link">
+    <span class="md-ellipsis">
+      LinearWaveguides
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resonator_abstraction.meep_resonator.LinearWaveguides.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      __init__
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resonator_abstraction.meep_resonator.LinearWaveguides.calc_coupling_length" class="md-nav__link">
+    <span class="md-ellipsis">
+      calc_coupling_length
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resonator_abstraction.meep_resonator.LinearWaveguides.plot_coupling_length" class="md-nav__link">
+    <span class="md-ellipsis">
+      plot_coupling_length
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#base-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Base Variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geometry" class="md-nav__link">
+    <span class="md-ellipsis">
+      Geometry
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#source" class="md-nav__link">
+    <span class="md-ellipsis">
+      Source
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Flux
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example script
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Documentation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resonator_abstraction.meep_resonator.LinearWaveguides" class="md-nav__link">
+    <span class="md-ellipsis">
+      LinearWaveguides
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resonator_abstraction.meep_resonator.LinearWaveguides.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      __init__
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resonator_abstraction.meep_resonator.LinearWaveguides.calc_coupling_length" class="md-nav__link">
+    <span class="md-ellipsis">
+      calc_coupling_length
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resonator_abstraction.meep_resonator.LinearWaveguides.plot_coupling_length" class="md-nav__link">
+    <span class="md-ellipsis">
+      plot_coupling_length
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="linear-waveguide">Linear Waveguide</h1>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#configuration">Configuration</a><ul>
+<li><a href="#base-variables">Base Variables</a></li>
+<li><a href="#derived-variables">Derived Variables</a></li>
+<li><a href="#geometry">Geometry</a></li>
+<li><a href="#source">Source</a></li>
+<li><a href="#flux">Flux</a></li>
+</ul>
+</li>
+<li><a href="#example-script">Example Script</a></li>
+<li><a href="#documentation">Documentation</a></li>
+</ul>
+<h2 id="overview">Overview</h2>
+<p>This example simulates coupling between two linear waveguides using Meep. The simulation analyzes the electric field distribution and calculates the coupling length based on the minima of the field envelope.</p>
+<h2 id="configuration">Configuration</h2>
+<h3 id="base-variables">Base Variables</h3>
+<pre><code class="language-json">{
+    &quot;base_vars&quot;: {
+        &quot;wavelength&quot;: 3.0,
+        &quot;df&quot;: 0.2,
+        &quot;nfreq&quot;: 1000,
+        &quot;n&quot;: 1.8,
+        &quot;resolution&quot;: 16,
+        &quot;runtime&quot;: 500,
+        &quot;padding&quot;: 2,
+        &quot;dpml&quot;: 2,
+        &quot;waveguide_distance&quot;: 0.7,
+        &quot;waveguide_width&quot;: 0.5,
+        &quot;sx&quot;: 50
+    },
+    &quot;derived_base_vars&quot;: {
+        &quot;fcen&quot;: &quot;1/wavelength&quot;,
+        &quot;freqs_min&quot;: &quot;fcen-df/2&quot;,
+        &quot;freqs_max&quot;: &quot;fcen+df/2&quot;,
+        &quot;sy&quot;: &quot;2*(waveguide_width + padding + dpml) + waveguide_distance&quot;
+    },
+    &quot;cell&quot;: {
+        &quot;size_x&quot;: &quot;sx&quot;,
+        &quot;size_y&quot;: &quot;sy&quot;,
+        &quot;size_z&quot;: &quot;0&quot;
+    },
+    &quot;boundary_layer&quot;: [
+        {
+            &quot;type&quot;: &quot;mp.PML&quot;,
+            &quot;depth&quot;: &quot;dpml&quot;
+        }
+    ],
+    &quot;source_file&quot;: &quot;simulation_sources.json&quot;,
+    &quot;geometry_file&quot;: &quot;geometry.json&quot;,
+    &quot;flux_file&quot;: &quot;flux.json&quot;,
+    &quot;coupling_fit_threshold&quot;: 0.15,
+    &quot;coupling_fit_first&quot;: 1,
+    &quot;coupling_fit_last&quot;: -1
+}
+</code></pre>
+<h3 id="geometry">Geometry</h3>
+<pre><code class="language-json">[
+  {
+    &quot;type&quot;: &quot;mp.Block&quot;,
+    &quot;size_x&quot;: &quot;1e20&quot;,
+    &quot;size_y&quot;: &quot;waveguide_width&quot;,
+    &quot;size_z&quot;: &quot;1e20&quot;,
+    &quot;center_x&quot;: &quot;0&quot;,
+    &quot;center_y&quot;: &quot;waveguide_distance/2&quot;,
+    &quot;center_z&quot;: &quot;0&quot;,
+    &quot;material_index&quot;: &quot;n&quot;
+  },
+  {
+    &quot;type&quot;: &quot;mp.Block&quot;,
+    &quot;size_x&quot;: &quot;1e20&quot;,
+    &quot;size_y&quot;: &quot;waveguide_width&quot;,
+    &quot;size_z&quot;: &quot;1e20&quot;,
+    &quot;center_x&quot;: &quot;0&quot;,
+    &quot;center_y&quot;: &quot;-waveguide_distance/2&quot;,
+    &quot;center_z&quot;: &quot;0&quot;,
+    &quot;material_index&quot;: &quot;n&quot;
+  }
+]
+</code></pre>
+<h3 id="source">Source</h3>
+<pre><code class="language-json">[
+  {
+    &quot;usage&quot;: &quot;simulation&quot;,
+    &quot;type&quot;: &quot;mp.ContinuousSource&quot;,
+    &quot;component&quot;: &quot;mp.Ez&quot;,
+    &quot;center_x&quot;: &quot;-sx/2 + dpml+ padding/2&quot;,
+    &quot;center_y&quot;: &quot;waveguide_distance/2&quot;,
+    &quot;center_z&quot;: &quot;0&quot;,
+    &quot;size_x&quot;: &quot;0&quot;,
+    &quot;size_y&quot;: &quot;0.5*waveguide_width&quot;,
+    &quot;size_z&quot;: &quot;0&quot;
+  }
+]
+</code></pre>
+<h3 id="flux">Flux</h3>
+<pre><code class="language-json">[
+  {
+    &quot;size_x&quot;: &quot;0&quot;,
+    &quot;size_y&quot;: &quot;0.5*waveguide_width&quot;,
+    &quot;size_z&quot;: &quot;0&quot;,
+    &quot;center_x&quot;: &quot;sx/2 - dpml - padding/2&quot;,
+    &quot;center_y&quot;: &quot;waveguide_distance/2&quot;,
+    &quot;center_z&quot;: &quot;0&quot;
+  },
+  {
+    &quot;size_x&quot;: &quot;0&quot;,
+    &quot;size_y&quot;: &quot;0.5*waveguide_width&quot;,
+    &quot;size_z&quot;: &quot;0&quot;,
+    &quot;center_x&quot;: &quot;sx/2 - dpml - padding/2&quot;,
+    &quot;center_y&quot;: &quot;-waveguide_distance/2&quot;,
+    &quot;center_z&quot;: &quot;0&quot;
+  }
+]
+</code></pre>
+<h2 id="example-script">Example script</h2>
+<pre><code class="language-python">from meep_resonator import LinearWaveguides
+
+# load and run the simulation
+sim = LinearWaveguides(&quot;config_file.json&quot;)
+sim.run_simulation(save_ez=True)
+
+# plot the coupling lenghts
+# by chaging threshold_percent=None and filter=[] change the fit parameters used
+
+sim.plot_coupling_length(threshold_percent=0.1, filter=[0,-1])
+# after the minima have been set, get the coupling length by running
+coupling_length = sim.calc_coupling_length()
+</code></pre>
+<h2 id="documentation">Documentation</h2>
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<a id="resonator_abstraction.meep_resonator.LinearWaveguides"></a>
+    <div class="doc doc-contents first">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="resonator_abstraction.meep_resonator.SimulationBase" href="../simbase/#resonator_abstraction.meep_resonator.SimulationBase">SimulationBase</a></code></p>
+
+
+        <p>A class for simulating and analyzing coupling behavior between parallel linear waveguides.</p>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>resonator_abstraction/meep_resonator.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">762</span>
+<span class="normal">763</span>
+<span class="normal">764</span>
+<span class="normal">765</span>
+<span class="normal">766</span>
+<span class="normal">767</span>
+<span class="normal">768</span>
+<span class="normal">769</span>
+<span class="normal">770</span>
+<span class="normal">771</span>
+<span class="normal">772</span>
+<span class="normal">773</span>
+<span class="normal">774</span>
+<span class="normal">775</span>
+<span class="normal">776</span>
+<span class="normal">777</span>
+<span class="normal">778</span>
+<span class="normal">779</span>
+<span class="normal">780</span>
+<span class="normal">781</span>
+<span class="normal">782</span>
+<span class="normal">783</span>
+<span class="normal">784</span>
+<span class="normal">785</span>
+<span class="normal">786</span>
+<span class="normal">787</span>
+<span class="normal">788</span>
+<span class="normal">789</span>
+<span class="normal">790</span>
+<span class="normal">791</span>
+<span class="normal">792</span>
+<span class="normal">793</span>
+<span class="normal">794</span>
+<span class="normal">795</span>
+<span class="normal">796</span>
+<span class="normal">797</span>
+<span class="normal">798</span>
+<span class="normal">799</span>
+<span class="normal">800</span>
+<span class="normal">801</span>
+<span class="normal">802</span>
+<span class="normal">803</span>
+<span class="normal">804</span>
+<span class="normal">805</span>
+<span class="normal">806</span>
+<span class="normal">807</span>
+<span class="normal">808</span>
+<span class="normal">809</span>
+<span class="normal">810</span>
+<span class="normal">811</span>
+<span class="normal">812</span>
+<span class="normal">813</span>
+<span class="normal">814</span>
+<span class="normal">815</span>
+<span class="normal">816</span>
+<span class="normal">817</span>
+<span class="normal">818</span>
+<span class="normal">819</span>
+<span class="normal">820</span>
+<span class="normal">821</span>
+<span class="normal">822</span>
+<span class="normal">823</span>
+<span class="normal">824</span>
+<span class="normal">825</span>
+<span class="normal">826</span>
+<span class="normal">827</span>
+<span class="normal">828</span>
+<span class="normal">829</span>
+<span class="normal">830</span>
+<span class="normal">831</span>
+<span class="normal">832</span>
+<span class="normal">833</span>
+<span class="normal">834</span>
+<span class="normal">835</span>
+<span class="normal">836</span>
+<span class="normal">837</span>
+<span class="normal">838</span>
+<span class="normal">839</span>
+<span class="normal">840</span>
+<span class="normal">841</span>
+<span class="normal">842</span>
+<span class="normal">843</span>
+<span class="normal">844</span>
+<span class="normal">845</span>
+<span class="normal">846</span>
+<span class="normal">847</span>
+<span class="normal">848</span>
+<span class="normal">849</span>
+<span class="normal">850</span>
+<span class="normal">851</span>
+<span class="normal">852</span>
+<span class="normal">853</span>
+<span class="normal">854</span>
+<span class="normal">855</span>
+<span class="normal">856</span>
+<span class="normal">857</span>
+<span class="normal">858</span>
+<span class="normal">859</span>
+<span class="normal">860</span>
+<span class="normal">861</span>
+<span class="normal">862</span>
+<span class="normal">863</span>
+<span class="normal">864</span>
+<span class="normal">865</span>
+<span class="normal">866</span>
+<span class="normal">867</span>
+<span class="normal">868</span>
+<span class="normal">869</span>
+<span class="normal">870</span>
+<span class="normal">871</span>
+<span class="normal">872</span>
+<span class="normal">873</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">LinearWaveguides</span><span class="p">(</span><span class="n">SimulationBase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A class for simulating and analyzing coupling behavior between parallel linear waveguides.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_file</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the LinearWaveguides simulation.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            config_file (str): Path to the configuration file used for setting up the simulation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">config_file</span><span class="p">)</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">calc_coupling_length</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculates the coupling length between waveguides based on the minima of the field envelope.</span>
+
+<span class="sd">        This method uses the Hilbert transform to extract the amplitude envelope of the Ez field</span>
+<span class="sd">        and identifies local minima that fall below a certain threshold, defined as a percentage of the</span>
+<span class="sd">        maximum envelope value. The average distance between these filtered minima is then used to</span>
+<span class="sd">        compute the coupling length.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: The calculated coupling length in simulation units.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">filter</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">threshold_percent</span> <span class="o">=</span> <span class="mf">0.1</span>
+        <span class="n">waveguide_center</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">base_vars</span><span class="p">[</span><span class="s2">&quot;sy&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_vars</span><span class="p">[</span><span class="s2">&quot;waveguide_distance&quot;</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">base_vars</span><span class="p">[</span><span class="s2">&quot;resolution&quot;</span><span class="p">],</span><span class="mi">0</span><span class="p">))</span>
+        <span class="n">signal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ez_field</span><span class="p">[</span><span class="n">waveguide_center</span><span class="p">]</span>
+        <span class="c1"># Compute analytic signal and amplitude envelope</span>
+        <span class="n">analytic_signal</span> <span class="o">=</span> <span class="n">hilbert</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span>
+        <span class="n">amplitude_envelope</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">analytic_signal</span><span class="p">)</span>
+
+        <span class="c1"># Find all local minima</span>
+        <span class="n">min_indices</span> <span class="o">=</span> <span class="n">argrelextrema</span><span class="p">(</span><span class="n">amplitude_envelope</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">less</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">config_file</span><span class="p">:</span>
+            <span class="n">config</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">config_file</span><span class="p">)</span>
+            <span class="n">threshold_percent</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;coupling_fit_threshold&quot;</span><span class="p">]</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">config_file</span><span class="p">:</span>
+            <span class="n">config</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">config_file</span><span class="p">)</span>
+            <span class="nb">filter</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;coupling_fit_first&quot;</span><span class="p">])</span>
+            <span class="nb">filter</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;coupling_fit_last&quot;</span><span class="p">])</span>
+
+        <span class="c1"># Threshold: keep only minima below 10% of the max envelope value</span>
+        <span class="n">threshold</span> <span class="o">=</span> <span class="n">threshold_percent</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">amplitude_envelope</span><span class="p">)</span>
+        <span class="n">filtered_min_indices</span> <span class="o">=</span> <span class="n">min_indices</span><span class="p">[</span><span class="n">amplitude_envelope</span><span class="p">[</span><span class="n">min_indices</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">][</span><span class="nb">filter</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="nb">filter</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+        <span class="n">coupling_length</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">filtered_min_indices</span><span class="p">))</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">base_vars</span><span class="p">[</span><span class="s2">&quot;resolution&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">coupling_length</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">plot_coupling_length</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threshold_percent</span> <span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span> <span class="p">,</span><span class="nb">filter</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[]):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Plots the Ez field and its amplitude envelope, highlighting the detected local minima used </span>
+<span class="sd">        in coupling length estimation.</span>
+
+<span class="sd">        This is useful for visual debugging and validation of coupling length calculations.</span>
+
+<span class="sd">        Changes in threshold_percent and filter will automatically be updated to the config file</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            threshold_percent (float, optional): Custom threshold as a percentage of max envelope for minima selection.</span>
+<span class="sd">                If None, the value is read from the configuration file.</span>
+<span class="sd">            filter (list, optional): List containing two indices `[start, end]` to slice the set of minima. </span>
+<span class="sd">                If not provided, values are taken from the configuration.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">waveguide_center</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">base_vars</span><span class="p">[</span><span class="s2">&quot;sy&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_vars</span><span class="p">[</span><span class="s2">&quot;waveguide_distance&quot;</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">base_vars</span><span class="p">[</span><span class="s2">&quot;resolution&quot;</span><span class="p">],</span><span class="mi">0</span><span class="p">))</span>
+        <span class="n">signal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ez_field</span><span class="p">[</span><span class="n">waveguide_center</span><span class="p">]</span>
+        <span class="c1"># Compute analytic signal and amplitude envelope</span>
+        <span class="n">analytic_signal</span> <span class="o">=</span> <span class="n">hilbert</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span>
+        <span class="n">amplitude_envelope</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">analytic_signal</span><span class="p">)</span>
+
+        <span class="c1"># Find all local minima</span>
+        <span class="n">min_indices</span> <span class="o">=</span> <span class="n">argrelextrema</span><span class="p">(</span><span class="n">amplitude_envelope</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">less</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+
+        <span class="c1"># filtering</span>
+        <span class="k">if</span> <span class="n">threshold_percent</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">config_file</span><span class="p">:</span>
+                <span class="n">config</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">config_file</span><span class="p">)</span>
+                <span class="n">threshold_percent</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;coupling_fit_threshold&quot;</span><span class="p">]</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">threshold_percent</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span> 
+            <span class="n">new_params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;coupling_fit_threshold&quot;</span> <span class="p">:</span> <span class="n">threshold_percent</span><span class="p">}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_append_to_config</span><span class="p">(</span><span class="n">new_params</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">filter</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">config_file</span><span class="p">:</span>
+                <span class="n">config</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">config_file</span><span class="p">)</span>
+                <span class="nb">filter</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;coupling_fit_first&quot;</span><span class="p">])</span>
+                <span class="nb">filter</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;coupling_fit_last&quot;</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">new_params</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;coupling_fit_first&quot;</span><span class="p">:</span><span class="nb">filter</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="s2">&quot;coupling_fit_last&quot;</span><span class="p">:</span><span class="nb">filter</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+            <span class="p">}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_append_to_config</span><span class="p">(</span><span class="n">new_params</span><span class="p">)</span>
+
+        <span class="c1"># Threshold: keep only minima below 10% of the max envelope value</span>
+        <span class="n">threshold</span> <span class="o">=</span> <span class="n">threshold_percent</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">amplitude_envelope</span><span class="p">)</span>
+        <span class="n">filtered_min_indices</span> <span class="o">=</span> <span class="n">min_indices</span><span class="p">[</span><span class="n">amplitude_envelope</span><span class="p">[</span><span class="n">min_indices</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">][</span><span class="nb">filter</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="nb">filter</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+
+        <span class="c1"># Plot</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">amplitude_envelope</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Envelope&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Original Signal&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">filtered_min_indices</span><span class="p">,</span> <span class="n">amplitude_envelope</span><span class="p">[</span><span class="n">filtered_min_indices</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Minima &lt; 10% max&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Envelope Minima Below 10% Threshold&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">filtered_min_indices</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="resonator_abstraction.meep_resonator.LinearWaveguides.__init__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">config_file</span><span class="p">)</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Initializes the LinearWaveguides simulation.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>config_file</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Path to the configuration file used for setting up the simulation.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="quote">
+              <summary>Source code in <code>resonator_abstraction/meep_resonator.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">766</span>
+<span class="normal">767</span>
+<span class="normal">768</span>
+<span class="normal">769</span>
+<span class="normal">770</span>
+<span class="normal">771</span>
+<span class="normal">772</span>
+<span class="normal">773</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_file</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Initializes the LinearWaveguides simulation.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        config_file (str): Path to the configuration file used for setting up the simulation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">config_file</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="resonator_abstraction.meep_resonator.LinearWaveguides.calc_coupling_length" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">calc_coupling_length</span><span class="p">()</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Calculates the coupling length between waveguides based on the minima of the field envelope.</p>
+<p>This method uses the Hilbert transform to extract the amplitude envelope of the Ez field
+and identifies local minima that fall below a certain threshold, defined as a percentage of the
+maximum envelope value. The average distance between these filtered minima is then used to
+compute the coupling length.</p>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>float</code></td>            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The calculated coupling length in simulation units.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="quote">
+              <summary>Source code in <code>resonator_abstraction/meep_resonator.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">776</span>
+<span class="normal">777</span>
+<span class="normal">778</span>
+<span class="normal">779</span>
+<span class="normal">780</span>
+<span class="normal">781</span>
+<span class="normal">782</span>
+<span class="normal">783</span>
+<span class="normal">784</span>
+<span class="normal">785</span>
+<span class="normal">786</span>
+<span class="normal">787</span>
+<span class="normal">788</span>
+<span class="normal">789</span>
+<span class="normal">790</span>
+<span class="normal">791</span>
+<span class="normal">792</span>
+<span class="normal">793</span>
+<span class="normal">794</span>
+<span class="normal">795</span>
+<span class="normal">796</span>
+<span class="normal">797</span>
+<span class="normal">798</span>
+<span class="normal">799</span>
+<span class="normal">800</span>
+<span class="normal">801</span>
+<span class="normal">802</span>
+<span class="normal">803</span>
+<span class="normal">804</span>
+<span class="normal">805</span>
+<span class="normal">806</span>
+<span class="normal">807</span>
+<span class="normal">808</span>
+<span class="normal">809</span>
+<span class="normal">810</span>
+<span class="normal">811</span>
+<span class="normal">812</span>
+<span class="normal">813</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">calc_coupling_length</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculates the coupling length between waveguides based on the minima of the field envelope.</span>
+
+<span class="sd">    This method uses the Hilbert transform to extract the amplitude envelope of the Ez field</span>
+<span class="sd">    and identifies local minima that fall below a certain threshold, defined as a percentage of the</span>
+<span class="sd">    maximum envelope value. The average distance between these filtered minima is then used to</span>
+<span class="sd">    compute the coupling length.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: The calculated coupling length in simulation units.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">filter</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">threshold_percent</span> <span class="o">=</span> <span class="mf">0.1</span>
+    <span class="n">waveguide_center</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">base_vars</span><span class="p">[</span><span class="s2">&quot;sy&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_vars</span><span class="p">[</span><span class="s2">&quot;waveguide_distance&quot;</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">base_vars</span><span class="p">[</span><span class="s2">&quot;resolution&quot;</span><span class="p">],</span><span class="mi">0</span><span class="p">))</span>
+    <span class="n">signal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ez_field</span><span class="p">[</span><span class="n">waveguide_center</span><span class="p">]</span>
+    <span class="c1"># Compute analytic signal and amplitude envelope</span>
+    <span class="n">analytic_signal</span> <span class="o">=</span> <span class="n">hilbert</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span>
+    <span class="n">amplitude_envelope</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">analytic_signal</span><span class="p">)</span>
+
+    <span class="c1"># Find all local minima</span>
+    <span class="n">min_indices</span> <span class="o">=</span> <span class="n">argrelextrema</span><span class="p">(</span><span class="n">amplitude_envelope</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">less</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">config_file</span><span class="p">:</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">config_file</span><span class="p">)</span>
+        <span class="n">threshold_percent</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;coupling_fit_threshold&quot;</span><span class="p">]</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">config_file</span><span class="p">:</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">config_file</span><span class="p">)</span>
+        <span class="nb">filter</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;coupling_fit_first&quot;</span><span class="p">])</span>
+        <span class="nb">filter</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;coupling_fit_last&quot;</span><span class="p">])</span>
+
+    <span class="c1"># Threshold: keep only minima below 10% of the max envelope value</span>
+    <span class="n">threshold</span> <span class="o">=</span> <span class="n">threshold_percent</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">amplitude_envelope</span><span class="p">)</span>
+    <span class="n">filtered_min_indices</span> <span class="o">=</span> <span class="n">min_indices</span><span class="p">[</span><span class="n">amplitude_envelope</span><span class="p">[</span><span class="n">min_indices</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">][</span><span class="nb">filter</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="nb">filter</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+    <span class="n">coupling_length</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">filtered_min_indices</span><span class="p">))</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">base_vars</span><span class="p">[</span><span class="s2">&quot;resolution&quot;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">coupling_length</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="resonator_abstraction.meep_resonator.LinearWaveguides.plot_coupling_length" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">plot_coupling_length</span><span class="p">(</span><span class="n">threshold_percent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">filter</span><span class="o">=</span><span class="p">[])</span></code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Plots the Ez field and its amplitude envelope, highlighting the detected local minima used 
+in coupling length estimation.</p>
+<p>This is useful for visual debugging and validation of coupling length calculations.</p>
+<p>Changes in threshold_percent and filter will automatically be updated to the config file</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>threshold_percent</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Custom threshold as a percentage of max envelope for minima selection.
+If None, the value is read from the configuration file.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>filter</code>
+            </td>
+            <td>
+                  <code><span title="list">list</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List containing two indices <code>[start, end]</code> to slice the set of minima. 
+If not provided, values are taken from the configuration.</p>
+              </div>
+            </td>
+            <td>
+                  <code>[]</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="quote">
+              <summary>Source code in <code>resonator_abstraction/meep_resonator.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">815</span>
+<span class="normal">816</span>
+<span class="normal">817</span>
+<span class="normal">818</span>
+<span class="normal">819</span>
+<span class="normal">820</span>
+<span class="normal">821</span>
+<span class="normal">822</span>
+<span class="normal">823</span>
+<span class="normal">824</span>
+<span class="normal">825</span>
+<span class="normal">826</span>
+<span class="normal">827</span>
+<span class="normal">828</span>
+<span class="normal">829</span>
+<span class="normal">830</span>
+<span class="normal">831</span>
+<span class="normal">832</span>
+<span class="normal">833</span>
+<span class="normal">834</span>
+<span class="normal">835</span>
+<span class="normal">836</span>
+<span class="normal">837</span>
+<span class="normal">838</span>
+<span class="normal">839</span>
+<span class="normal">840</span>
+<span class="normal">841</span>
+<span class="normal">842</span>
+<span class="normal">843</span>
+<span class="normal">844</span>
+<span class="normal">845</span>
+<span class="normal">846</span>
+<span class="normal">847</span>
+<span class="normal">848</span>
+<span class="normal">849</span>
+<span class="normal">850</span>
+<span class="normal">851</span>
+<span class="normal">852</span>
+<span class="normal">853</span>
+<span class="normal">854</span>
+<span class="normal">855</span>
+<span class="normal">856</span>
+<span class="normal">857</span>
+<span class="normal">858</span>
+<span class="normal">859</span>
+<span class="normal">860</span>
+<span class="normal">861</span>
+<span class="normal">862</span>
+<span class="normal">863</span>
+<span class="normal">864</span>
+<span class="normal">865</span>
+<span class="normal">866</span>
+<span class="normal">867</span>
+<span class="normal">868</span>
+<span class="normal">869</span>
+<span class="normal">870</span>
+<span class="normal">871</span>
+<span class="normal">872</span>
+<span class="normal">873</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">plot_coupling_length</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threshold_percent</span> <span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span> <span class="p">,</span><span class="nb">filter</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plots the Ez field and its amplitude envelope, highlighting the detected local minima used </span>
+<span class="sd">    in coupling length estimation.</span>
+
+<span class="sd">    This is useful for visual debugging and validation of coupling length calculations.</span>
+
+<span class="sd">    Changes in threshold_percent and filter will automatically be updated to the config file</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        threshold_percent (float, optional): Custom threshold as a percentage of max envelope for minima selection.</span>
+<span class="sd">            If None, the value is read from the configuration file.</span>
+<span class="sd">        filter (list, optional): List containing two indices `[start, end]` to slice the set of minima. </span>
+<span class="sd">            If not provided, values are taken from the configuration.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">waveguide_center</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">base_vars</span><span class="p">[</span><span class="s2">&quot;sy&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_vars</span><span class="p">[</span><span class="s2">&quot;waveguide_distance&quot;</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">base_vars</span><span class="p">[</span><span class="s2">&quot;resolution&quot;</span><span class="p">],</span><span class="mi">0</span><span class="p">))</span>
+    <span class="n">signal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ez_field</span><span class="p">[</span><span class="n">waveguide_center</span><span class="p">]</span>
+    <span class="c1"># Compute analytic signal and amplitude envelope</span>
+    <span class="n">analytic_signal</span> <span class="o">=</span> <span class="n">hilbert</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span>
+    <span class="n">amplitude_envelope</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">analytic_signal</span><span class="p">)</span>
+
+    <span class="c1"># Find all local minima</span>
+    <span class="n">min_indices</span> <span class="o">=</span> <span class="n">argrelextrema</span><span class="p">(</span><span class="n">amplitude_envelope</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">less</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+
+    <span class="c1"># filtering</span>
+    <span class="k">if</span> <span class="n">threshold_percent</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">config_file</span><span class="p">:</span>
+            <span class="n">config</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">config_file</span><span class="p">)</span>
+            <span class="n">threshold_percent</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;coupling_fit_threshold&quot;</span><span class="p">]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">threshold_percent</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span> 
+        <span class="n">new_params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;coupling_fit_threshold&quot;</span> <span class="p">:</span> <span class="n">threshold_percent</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_append_to_config</span><span class="p">(</span><span class="n">new_params</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">filter</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">config_file</span><span class="p">:</span>
+            <span class="n">config</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">config_file</span><span class="p">)</span>
+            <span class="nb">filter</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;coupling_fit_first&quot;</span><span class="p">])</span>
+            <span class="nb">filter</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;coupling_fit_last&quot;</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">new_params</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;coupling_fit_first&quot;</span><span class="p">:</span><span class="nb">filter</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="s2">&quot;coupling_fit_last&quot;</span><span class="p">:</span><span class="nb">filter</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_append_to_config</span><span class="p">(</span><span class="n">new_params</span><span class="p">)</span>
+
+    <span class="c1"># Threshold: keep only minima below 10% of the max envelope value</span>
+    <span class="n">threshold</span> <span class="o">=</span> <span class="n">threshold_percent</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">amplitude_envelope</span><span class="p">)</span>
+    <span class="n">filtered_min_indices</span> <span class="o">=</span> <span class="n">min_indices</span><span class="p">[</span><span class="n">amplitude_envelope</span><span class="p">[</span><span class="n">min_indices</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">][</span><span class="nb">filter</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="nb">filter</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+
+    <span class="c1"># Plot</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">amplitude_envelope</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Envelope&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Original Signal&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">filtered_min_indices</span><span class="p">,</span> <span class="n">amplitude_envelope</span><span class="p">[</span><span class="n">filtered_min_indices</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Minima &lt; 10% max&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Envelope Minima Below 10% Threshold&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">filtered_min_indices</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>
