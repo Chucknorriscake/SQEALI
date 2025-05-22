@@ -1,9 +1,9 @@
 site_name: SQEALI
 site_url: https://julianverhey.physics.unitn.it/advancedphotonicsmeep
+use_directory_urls: false  # Required for GitLab Pages
+
 theme:
   name: material
-
-use_directory_urls: false  # Important for GitLab Pages
 
 plugins:
   - mkdocstrings:
@@ -17,3 +17,6 @@ nav:
   - Simulation Base: simbase.md
   - Ring Resonator: ringresonator.md
   - Linear Waveguide: linearwaveguide.md
+
+extra:
+  base_path: /advancedphotonicsmeep/
