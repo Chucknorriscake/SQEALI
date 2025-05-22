@@ -1,5 +1,6 @@
 {
     "python.analysis.extraPaths": [
-        "./resonator_abstraction.py"
+        "./resonator_abstraction.py",
+        "./resonator_abstraction"
     ]
 }

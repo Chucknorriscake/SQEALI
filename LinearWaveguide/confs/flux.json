@@ -1,0 +1,18 @@
+[
+    {
+        "size_x": "0",
+        "size_y": "0.5*waveguide_width",
+        "size_z": "0",
+        "center_x": "sx/2 - dpml- padding/2",
+        "center_y": "waveguide_distance/2",
+        "center_z": "0"
+    },
+    {
+        "size_x": "0",
+        "size_y": "0.5*waveguide_width",
+        "size_z": "0",
+        "center_x": "sx/2 - dpml-  padding/2",
+        "center_y": "-waveguide_distance/2",
+        "center_z": "0"
+    }
+]

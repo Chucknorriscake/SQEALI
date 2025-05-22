@@ -8,6 +8,7 @@ import os
 import queue
 from IPython.display import Video
 from scipy.optimize import curve_fit
+from scipy.signal import hilbert, argrelextrema
 from helpers import parse_expression
 from tqdm import tqdm
 import csv 
@@ -17,17 +18,17 @@ logger = logging.getLogger(__name__)
 
 # Base class for handling configuration and setup
 class SimulationBase:
-    '''
-    Meep wrapper that allows to build simulations by providing a framework that loads a JSON config file and sets up
-    the simulation domain accordingly to the file. 
-    '''
+    """
+    Meep wrapper that allows building simulations by loading a JSON config file and 
+    setting up the simulation domain accordingly.
+    """
     def __init__(self, config_file : str) -> None:
-        '''
-        just an init
-        
-        Keywords:
-            config_file: path of the config file that contains the simulation parameters
-        '''
+        """
+        Initializes the simulation environment using a given JSON config file.
+
+        Args:
+            config_file (str): Path to the configuration file containing simulation parameters.
+        """
         self.base_vars = {}
         self.sources = []
         self.geometry = []
@@ -38,6 +39,7 @@ class SimulationBase:
         self.config_file=config_file
         self.sim = None
         self.ez_field = None
+        self.ez_loaded = False
         # parallel processing 
         mp.divide_parallel_processes(1)
         # shut up if needed 
@@ -58,12 +60,15 @@ class SimulationBase:
 #################################################################
 
     def _load_conf(self, path: str) -> mp.Simulation:
-        '''
-        loads the configuration file from a path containing JSON and returns a setup Meep Simulation object
-        
-        Keywords:
-            path: location of config file (JSON)
-        '''
+        """
+        Loads the configuration from a JSON file and sets up the simulation.
+
+        Args:
+            path (str): Path to the configuration file.
+
+        Returns:
+            mp.Simulation: Configured Meep simulation object.
+        """
         try:  
             with open(path) as config_file:
                 config = json.load(config_file)
@@ -75,6 +80,7 @@ class SimulationBase:
                 try:
                     ez_path = config["ez_file"]
                     self.ez_field = self._load_ez_data(ez_path)
+                    self.ez_loaded = True
                     logger.info("Simulation parameters have been run before and ez field has been loaded!")
                 except:
                     pass
@@ -99,16 +105,15 @@ class SimulationBase:
             raise
 
     def _load_basic_variables(self, path: str) -> dict:
-        '''
-        basic variables define the geometric parameters of a Meep simulation, as well as the sources frequency and width.
-        these are loaded from the main config file directly
-        
-        Keywords:
-            path: location of main config file
-            
-        Return:
-            base_vars: dictionary of all basic variables from which the rest of the simulation domain will be set up 
-        '''
+        """
+        Loads basic and derived variables from the configuration.
+
+        Args:
+            path (str): Path to the configuration file.
+
+        Returns:
+            dict: Dictionary containing basic simulation variables.
+        """
         try:
             with open(path) as config_file:
                 config = json.load(config_file)
@@ -129,21 +134,22 @@ class SimulationBase:
             raise
 
     def _set_simulation_params(self) -> None:
-        '''
-        Sets the resolution and runtime of the simulation domain
-        '''
+        """
+        Sets resolution and runtime parameters for the simulation.
+        """
         self.resolution = self.base_vars.get("resolution", 16)
         self.runtime = self.base_vars.get("runtime", 100)
 
     def _build_sources(self, path: str) -> list:
-        '''
-        builds the sources that are defined within the sources file
-        
-        Keywords: 
-            path: location of the sources file (JSON)
-        Return:
-            sources: list of mp.Sources that can be fed into mp.Simulation
-        '''
+        """
+        Builds sources from a JSON file.
+
+        Args:
+            path (str): Path to the source configuration file.
+
+        Returns:
+            list: List of Meep source objects.
+        """
         try:
             with open(path) as f:
                 sources_config = json.load(f)
@@ -180,15 +186,15 @@ class SimulationBase:
             raise
 
     def _build_geometry(self, path: str) -> list:
-        '''
-        builds the geometries that are defined within the geometry file. Right now ONLY cylinders and blocks are supported.
-        
-        Keywords: 
-            path: location of the geometries file (JSON)
-        
-        Return:
-            geometries: list of mp.Cylinder, mp.Blocks that can be fed into mp.Simulation
-        '''
+        """
+        Builds geometry objects from a configuration file.
+
+        Args:
+            path (str): Path to the geometry configuration file.
+
+        Returns:
+            list: List of Meep geometry objects (Blocks or Cylinders).
+        """
         try:
             with open(path) as f:
                 geometry_config = json.load(f)
@@ -230,15 +236,15 @@ class SimulationBase:
             raise
 
     def _build_boundary_layers(self, path: str) -> list:
-        '''
-        creates the simulations boundary layer. Read directly from the config file
-        
-        Keywords: 
-        path: location of the main config file
-        
-        Return:
-            boundary_layers: list of boundary layers
-        '''
+        """
+        Builds boundary layers from the main configuration file.
+
+        Args:
+            path (str): Path to the configuration file.
+
+        Returns:
+            list: List of Meep boundary layer objects.
+        """
         try:
             with open(path) as config_file:
                 config = json.load(config_file)
@@ -255,15 +261,15 @@ class SimulationBase:
             raise
 
     def _build_cell(self, path: str) -> mp.Vector3:
-        '''
-        creates the simulations cell. Read directly from the config file
-        
-        Keywords: 
-            path: location of the main config file
-        
-        Return:
-            cell: mp.Vector3 of cell size 
-        '''
+        """
+        Constructs the simulation cell dimensions from config.
+
+        Args:
+            path (str): Path to the configuration file.
+
+        Returns:
+            mp.Vector3: Vector describing the simulation cell size.
+        """
         try:
             with open(path) as config_file:
                 config = json.load(config_file)
@@ -277,9 +283,12 @@ class SimulationBase:
             raise
 
     def _build_flux(self, path : str) -> None:
-        '''
-        adds fluxes to the simulation domain if present
-        '''
+        """
+        Adds flux monitors to the simulation from a configuration file.
+
+        Args:
+            path (str): Path to the flux configuration file.
+        """
         try:
             with open(path) as fluxes:
                 flux_config = json.load(fluxes)
@@ -303,24 +312,24 @@ class SimulationBase:
             logger.error(f"Error adding fluxes: {e}")
 
     def _load_ez_data(self, path : str) -> None:
-        '''
-        loads ez_data, if there is ez_data available in 
-        
-        Keywords:
-            path: path to csv that stores the ez field after simulation across the simulation cell
-            
-        Return:
-            ez field: 2d np.array of simulation domain with ez field strength at every postion
-        '''
+        """
+        Loads electric field (Ez) data from a CSV file.
+
+        Args:
+            path (str): Path to the CSV file.
+
+        Returns:
+            np.ndarray: 2D array of Ez field values.
+        """
         return np.loadtxt(path, delimiter=",")
 
     def _append_to_config(self, params : dict) -> None:
-        '''
-        generic append function that allows to enlarge/edit the main config files by using a dictionary
-        
-        Keywords:
-            params: dictionary of params that should be edited or changed
-        '''
+        """
+        Updates the configuration file with new parameters.
+
+        Args:
+            params (dict): Dictionary of parameters to append/update in the config.
+        """
         try:
             # Load the existing configuration
             with open(self.config_file, 'r') as config_file:
@@ -335,9 +344,15 @@ class SimulationBase:
             logger.error("File {} doesn't exist.".format(self.config_file))
 
     def _waveguide_ez_field(self, slice=None):
-        '''
-        gets the ez_data from the simulation and flat out returns it.
-        '''
+        """
+        Retrieves the Ez field from the simulation domain.
+
+        Args:
+            slice (optional): Slice of the Ez field to return.
+
+        Returns:
+            np.ndarray: 2D array or sliced view of the Ez field.
+        """
         self.ez_field = self.sim.get_array(center=mp.Vector3(), size=self.simulation_domain, component=mp.Ez).transpose()
         if slice == None:
             return self.ez_field
@@ -345,12 +360,12 @@ class SimulationBase:
             return self.ez_field[slice]
     
     def _waveguide_ez_field_save(self, safe_file : str):
-        '''
-        after a simulation is done this saves the ez field to a csv with defined path
-        
-        Keywords:
-            safe_file: location of the simulation ez field results
-        '''
+        """
+        Saves the Ez field data to a CSV file.
+
+        Args:
+            safe_file (str): Path to the file where Ez data will be saved.
+        """
         ez_data = self._waveguide_ez_field()
         # write ez to a csv
         with open(safe_file,'w') as myfile:
@@ -360,6 +375,12 @@ class SimulationBase:
         self._append_to_config({"ez_file": safe_file})
         
     def run_simulation(self, save_ez=False):
+        """
+        Runs the simulation using the configured parameters.
+
+        Args:
+            save_ez (bool, optional): Whether to save the Ez field data. Defaults to False.
+        """
         try:
             with open(self.sources_path) as f:
                 sources = json.load(f)
@@ -392,10 +413,10 @@ class SimulationBase:
 
     def run(self, target, *args, **kwargs):
         """
-        Start the simulation with a specified target function and its parameters.
-    
-        Keywords:
-            target (callable): The function to execute in the thread.
+        Runs a target function in a separate thread.
+
+        Args:
+            target (callable): Function to execute.
             *args: Positional arguments for the target function.
             **kwargs: Keyword arguments for the target function.
         """
@@ -430,8 +451,13 @@ class SimulationBase:
         self._worker_thread = threading.Thread(target=worker, args=(target, *args), kwargs=kwargs, daemon=False)
         self._worker_thread.start()
 
-    def is_running(self) -> bool:
-        """Check if the simulation is still running."""
+    def is_running(self) -> bool:        
+        """
+        Checks if the worker thread is still running.
+
+        Returns:
+            bool: True if the thread is active, False otherwise.
+        """
         return self._worker_thread.is_alive() if self._worker_thread else False
 
     def stop(self):
@@ -441,7 +467,15 @@ class SimulationBase:
             self.sim.stop()  # Assuming Meep's stop method works cleanly
 
     def get_result(self):
-        """Retrieve the simulation result if available."""
+        """
+        Retrieves the result from the result queue.
+
+        Returns:
+            any: Result from the simulation.
+
+        Raises:
+            RuntimeError: If no result is available yet.
+        """
         if not self._result_queue.empty():
             return self._result_queue.get_nowait()
         else:
@@ -450,6 +484,12 @@ class SimulationBase:
       # Total simulation time
 
     def progress_callback(self, sim):
+        """
+        Updates the progress bar during simulation.
+
+        Args:
+            sim (mp.Simulation): The Meep simulation object.
+        """
         self.progress_bar.update(1)
 
 #################################################################
@@ -457,9 +497,12 @@ class SimulationBase:
 #################################################################
 
     def view_sim_region(self, dpi=150) -> None:
-        '''
-        plots the simulation region to stdout. Useful to check config file.
-        '''
+        """
+        Plots the simulation region.
+
+        Args:
+            dpi (int, optional): DPI resolution for the plot. Defaults to 150.
+        """
         try:
             plt.figure(dpi=dpi)
             self.sim.plot2D()
@@ -468,9 +511,12 @@ class SimulationBase:
             logger.error(f"Error visualizing simulation region: {e}")
  
     def get_waveguide_ez_field(self) -> np.array:
-        '''
-        external function to get the ez_field data from the simulation
-        '''
+        """
+        Gets the Ez field after simulation.
+
+        Returns:
+            np.ndarray: 2D array of the Ez field.
+        """
         try:
             if self.ez_field.any() == None :
                 # this will fail if ez_field has not been setup yet
@@ -484,30 +530,29 @@ class SimulationBase:
         
 # Derived class for ring resonator-specific functionality
 class RingResonator(SimulationBase):
-    '''
-    Ring resonator simulation that offers the possibility to find resonances by harminv simulations and later offers
-    full system simulation once a resonance for the specific simulation params have been found.
-    '''
+    """
+    Ring resonator simulation that offers the possibility to find resonances via Harminv
+    simulations and later supports full system simulation after a resonance is identified.
+    """
     def __init__(self, config_file : str) -> None:
-        '''
-        simple init that inherits from SimulationBase for simulation region setup
-        then adds the ring resonator specific parameters of resonances to the system
-        
-        Keywords:
-            config_file: location of the config file to set the simulation up
-        '''
+        """
+        Initializes the ring resonator simulation by inheriting from SimulationBase.
+
+        Args:
+            config_file (str): Path to the configuration file.
+        """
         super().__init__(config_file)
         self.resonance_frequency = -1
         self.resonance_wavelength = -1
   
     def find_resonances(self, resonance_conf_path : str):
-        '''
-        puts a harminv object within the ring resonator, resets the simulation (just in case the 
-        simulation had some shenanigans done to it) and runs it
-        
-        Keywords:
-            resonance_conf_path: output path to where to simulation details for the found resonance should be stored
-        '''
+        """
+        Runs a Harminv-based simulation to find resonances in the ring resonator. 
+        The resonance frequency and wavelength are extracted and saved.
+
+        Args:
+            resonance_conf_path (str): Path to save the updated simulation configuration file.
+        """
         try:
             with open(self.geometry_path) as config_file:
                 geometry_config = json.load(config_file)
@@ -549,15 +594,16 @@ class RingResonator(SimulationBase):
             logger.error(f"Error finding resonances: {e}")
 
     def get_resonance_from_q_factor(self, qFactor, resonances):
-        '''
-        find the resonance from the harminv q factor
-        
-        Keywords:
-            qFactor: list of qFactors
-            resonances: list of resonances
-        Return:
-            resonance: resonance frequency of the ring if it exists
-        '''
+        """
+        Determines the resonance frequency based on the Q factors returned by Harminv.
+
+        Args:
+            qFactor (list): List of Q factor values.
+            resonances (list): Corresponding list of resonance frequencies.
+
+        Returns:
+            float: The selected resonance frequency.
+        """
         # Normalize Q factors
         max_q = max(qFactor)
         normalized_q = [q / max_q for q in qFactor]
@@ -596,11 +642,12 @@ class RingResonator(SimulationBase):
 
     def write_simulation_config(self, base_config_file : str, new_file_name: str):
         """
-        Updates the resonance wavelength in the 'base_vars' of the configuration file.
+        Updates the resonance wavelength in the 'base_vars' of the given configuration file
+        and writes the modified configuration to a new file.
 
-        Keywords:
-            config_file: Path to the configuration file.
-            new_wavelength: The new resonance wavelength to be updated.
+        Args:
+            base_config_file (str): Path to the base configuration file.
+            new_file_name (str): Path to save the updated configuration.
         """
         try:
             # Load the existing configuration
@@ -637,10 +684,10 @@ class RingResonator(SimulationBase):
 
     def run_resonance(self, save_ez=False):
         """
-        once resonances are found, this function runs the simulation until the self.runtime is reached
-        
-        Keywords:
-            save_ez: boolean of whether you want to save ez or just discard it
+        Runs a full simulation using the previously determined resonance frequency.
+
+        Args:
+            save_ez (bool, optional): Whether to save the Ez field data. Defaults to False.
         """
         # TODO: if the resonance has been run already: ask if it should be rerun
         
@@ -672,24 +719,23 @@ class RingResonator(SimulationBase):
             raise FileExistsError("File {} does not exist".format(self.sources_path))
 
     def plot_field_result(self, slice: tuple) -> None:
-        '''
-        plot the field results 
-        
-        Keywords:
-            slice: tuple of a y axis section that should be in focus while plotting
-        '''
+        """
+        Plots the Ez field result using a vertical slice of the simulation domain.
+
+        Args:
+            slice (tuple): A tuple specifying the start and end indices along the y-axis.
+        """
         plt.imshow(self.ez_field[slice[0]:slice[1]])
         plt.show()
 
     def plot_coupling(self, plot_params_guess=[0.08,0.3, 5], slice=90):
-        '''
-        rudimentary fitting function that should take the wavefront along the linear waveguide and then fits a sinusoidal
-        function to the interferred part of the function
-        
-        Keywords:
-            plot_params_guess: guess for the fitting parameters (default works well for the set example )
-            slice: 1d array element of the row in which the linear waveguide sits within the simulation domain
-        '''
+        """
+        Fits a sinusoidal curve to the wavefront along the linear waveguide and plots the results.
+
+        Args:
+            plot_params_guess (list, optional): Initial guess for the sinusoidal fitting parameters.
+            slice (int, optional): Y-axis index corresponding to the waveguide cross-section.
+        """
         ez_data = self.get_waveguide_ez_field() #self.sim.get_array(center=mp.Vector3(), size=self.simulation_domain, component=mp.Ez)
         plt.plot(ez_data.transpose()[slice],  "--", alpha=0.5, label="simulation")
         xdata_start= 250
@@ -714,9 +760,117 @@ class RingResonator(SimulationBase):
 
 
 class LinearWaveguides(SimulationBase):
+    """
+    A class for simulating and analyzing coupling behavior between parallel linear waveguides.
+    """
     def __init__(self, config_file):
+        """
+        Initializes the LinearWaveguides simulation.
+
+        Args:
+            config_file (str): Path to the configuration file used for setting up the simulation.
+        """
         super().__init__(config_file)
         
+    
+    def calc_coupling_length(self) -> float:
+        """
+        Calculates the coupling length between waveguides based on the minima of the field envelope.
+
+        This method uses the Hilbert transform to extract the amplitude envelope of the Ez field
+        and identifies local minima that fall below a certain threshold, defined as a percentage of the
+        maximum envelope value. The average distance between these filtered minima is then used to
+        compute the coupling length.
+
+        Returns:
+            float: The calculated coupling length in simulation units.
+        """
+        filter = []
+        threshold_percent = 0.1
+        waveguide_center = int(np.round((self.base_vars["sy"] + self.base_vars["waveguide_distance"])/2*self.base_vars["resolution"],0))
+        signal = self.ez_field[waveguide_center]
+        # Compute analytic signal and amplitude envelope
+        analytic_signal = hilbert(signal)
+        amplitude_envelope = np.abs(analytic_signal)
+
+        # Find all local minima
+        min_indices = argrelextrema(amplitude_envelope, np.less)[0]
+
+
+        with open(self.config_file, 'r') as config_file:
+            config = json.load(config_file)
+            threshold_percent = config["coupling_fit_threshold"]
+
+        with open(self.config_file, 'r') as config_file:
+            config = json.load(config_file)
+            filter.append(config["coupling_fit_first"])
+            filter.append(config["coupling_fit_last"])
+        
+        # Threshold: keep only minima below 10% of the max envelope value
+        threshold = threshold_percent * np.max(amplitude_envelope)
+        filtered_min_indices = min_indices[amplitude_envelope[min_indices] < threshold][filter[0]:filter[1]]
+        coupling_length = np.average(np.diff(filtered_min_indices))/self.base_vars["resolution"]
+        return coupling_length
+        
+    def plot_coupling_length(self, threshold_percent : float = None ,filter: list = []):
+        """
+        Plots the Ez field and its amplitude envelope, highlighting the detected local minima used 
+        in coupling length estimation.
+
+        This is useful for visual debugging and validation of coupling length calculations.
+        
+        Changes in threshold_percent and filter will automatically be updated to the config file
+
+        Args:
+            threshold_percent (float, optional): Custom threshold as a percentage of max envelope for minima selection.
+                If None, the value is read from the configuration file.
+            filter (list, optional): List containing two indices `[start, end]` to slice the set of minima. 
+                If not provided, values are taken from the configuration.
+        """
+        waveguide_center = int(np.round((self.base_vars["sy"] + self.base_vars["waveguide_distance"])/2*self.base_vars["resolution"],0))
+        signal = self.ez_field[waveguide_center]
+        # Compute analytic signal and amplitude envelope
+        analytic_signal = hilbert(signal)
+        amplitude_envelope = np.abs(analytic_signal)
+
+        # Find all local minima
+        min_indices = argrelextrema(amplitude_envelope, np.less)[0]
+
+
+        # filtering
+        if threshold_percent == None:
+            with open(self.config_file, 'r') as config_file:
+                config = json.load(config_file)
+                threshold_percent = config["coupling_fit_threshold"]
+                print(threshold_percent)
+        else: 
+            new_params = {"coupling_fit_threshold" : threshold_percent}
+            self._append_to_config(new_params)
+            
+        if len(filter) == 0:
+            with open(self.config_file, 'r') as config_file:
+                config = json.load(config_file)
+                filter.append(config["coupling_fit_first"])
+                filter.append(config["coupling_fit_last"])
+        else:
+            new_params = {
+                "coupling_fit_first":filter[0],
+                "coupling_fit_last":filter[1],
+            }
+            self._append_to_config(new_params)
+
+        # Threshold: keep only minima below 10% of the max envelope value
+        threshold = threshold_percent * np.max(amplitude_envelope)
+        filtered_min_indices = min_indices[amplitude_envelope[min_indices] < threshold][filter[0]:filter[1]]
+
+        # Plot
+        plt.plot(amplitude_envelope, label="Envelope")
+        plt.plot(signal, label="Original Signal")
+        plt.scatter(filtered_min_indices, amplitude_envelope[filtered_min_indices], color='red', label='Minima < 10% max')
+        plt.legend()
+        plt.title("Envelope Minima Below 10% Threshold")
+        print(np.diff(filtered_min_indices))
+        plt.show()
         
 def sinus(x, a, b, c):
     return a * np.sin(b * x + c)

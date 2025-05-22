@@ -1,0 +1,15 @@
+site_name: SQEALI
+theme:
+  name: material
+
+plugins:
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: google
+nav:
+  - Home: index.md
+  - Simulation Base: simbase.md
+  - Ring Resonator: ringresonator.md
+  - Linear Waveguide: linearwaveguide.md 
