@@ -8,11 +8,10 @@ pages:
   script:
     - pip install --upgrade pip
     - pip install mkdocs mkdocs-material mkdocstrings[python]
-    - mkdocs build
-    - mv site public
+    - mkdocs build  # this already outputs to public/
   artifacts:
     paths:
       - public
     expire_in: 1 week
   only:
-    - main  # Or 'master', depending on your default branch
+    - main  # or 'master'
