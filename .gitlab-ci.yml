@@ -8,9 +8,16 @@ pages:
   script:
     - pip install --upgrade pip
     - pip install mkdocs mkdocs-material mkdocstrings[python]
-    - mkdocs build --verbose  # Add verbose output for debugging
-    - ls -la public/  # Verify files are generated
-    - ls -la public/index.html  # Verify index.html exists
+    - echo "Building site..."
+    - mkdocs build --verbose
+    - echo "Contents of public directory:"
+    - ls -la public/
+    - echo "Checking if index.html exists:"
+    - ls -la public/index.html || echo "index.html not found!"
+    - echo "First few lines of index.html:"
+    - head -20 public/index.html 2>/dev/null || echo "Cannot read index.html"
+    - echo "Total size of public directory:"
+    - du -sh public/
   artifacts:
     paths:
       - public
