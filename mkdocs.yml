@@ -1,7 +1,8 @@
 site_name: SQEALI
 site_url: https://julianverhey.physics.unitn.it/advancedphotonicsmeep
 use_directory_urls: false
-site_dir: public  # ✅ No quotes or trailing slash
+docs_dir: docs  # Specify the source directory
+site_dir: public
 
 theme:
   name: material

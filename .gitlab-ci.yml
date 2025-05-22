@@ -8,10 +8,12 @@ pages:
   script:
     - pip install --upgrade pip
     - pip install mkdocs mkdocs-material mkdocstrings[python]
-    - mkdocs build  # this already outputs to public/
+    - mkdocs build --verbose  # Add verbose output for debugging
+    - ls -la public/  # Verify files are generated
+    - ls -la public/index.html  # Verify index.html exists
   artifacts:
     paths:
       - public
     expire_in: 1 week
-  only:
-    - main  # or 'master'
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"  # Modern GitLab syntax instead of 'only'
