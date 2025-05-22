@@ -1,6 +1,10 @@
 site_name: SQEALI
+site_url: https://julianverhey.gitlab.io/advancedphotonicsmeep/
+
 theme:
   name: material
+
+use_directory_urls: false  # Important for GitLab Pages
 
 plugins:
   - mkdocstrings:
@@ -8,8 +12,9 @@ plugins:
         python:
           options:
             docstring_style: google
+
 nav:
   - Home: index.md
   - Simulation Base: simbase.md
   - Ring Resonator: ringresonator.md
-  - Linear Waveguide: linearwaveguide.md 
+  - Linear Waveguide: linearwaveguide.md

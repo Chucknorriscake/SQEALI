@@ -1,5 +1,8 @@
 image: python:3.11
 
+stages:
+  - deploy
+
 pages:
   stage: deploy
   script:
@@ -10,5 +13,6 @@ pages:
   artifacts:
     paths:
       - public
+    expire_in: 1 week
   only:
-    - main  # or your default branch name
+    - main  # Or 'master', depending on your default branch
