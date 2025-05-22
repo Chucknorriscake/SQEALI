@@ -3,7 +3,7 @@
         "usage" : "harminv",
         "type": "mp.GaussianSource",
         "component": "mp.Ez",
-        "center_x": "-sx/2 + padding/2 +0.5",
+        "center_x": "-sx/2 + dpml +0.5",
         "center_y": "waveguide_xpos",
         "center_z": "0",
         "size_x": "0",

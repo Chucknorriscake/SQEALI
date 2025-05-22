@@ -6,7 +6,7 @@ import timeit
 start = timeit.default_timer()
 
 
-wavelengths = np.linspace(0.6,10,30)
+wavelengths = np.linspace(0.1,3,20)
 conf_path = "conf_overcoupling.json"
 
 for wavelength in wavelengths:

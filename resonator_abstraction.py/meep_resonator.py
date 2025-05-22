@@ -4,6 +4,7 @@ import meep as mp
 import json
 import logging
 import threading
+import os
 import queue
 from IPython.display import Video
 from scipy.optimize import curve_fit
@@ -358,6 +359,33 @@ class SimulationBase:
         # add ez file path to config directory
         self._append_to_config({"ez_file": safe_file})
         
+    def run_simulation(self, save_ez=False):
+        try:
+            with open(self.sources_path) as f:
+                sources = json.load(f)
+                # allows to run the simulation ONLY if we're loading the correct sources - else aborts
+                valid_simulation_sources = [True for source in sources if source["usage"] == "simulation"]
+                if (len(valid_simulation_sources) == len(sources) and (len(sources) != 0)):
+                    clear_cmd()
+                    self.progress_bar = tqdm(total=self.runtime, desc="Simulation Progress")
+                    self.sim.run(mp.at_beginning(mp.output_epsilon),
+                                 mp.to_appended("{}".format(self.config_file.split(".")[0]), mp.at_every(1, lambda sim: self.progress_callback(sim))),
+                                 until=self.runtime)
+                    self.progress_bar.close()
+                    # save ez to a file
+                    safe_file = ""
+                    if save_ez == True:
+                        for elem in self.config_file.split("."):
+                            if elem != self.config_file.split(".")[-1]:
+                                safe_file += elem
+                                safe_file += "."
+                        safe_file = "ez_" + safe_file + "csv"
+                        self._waveguide_ez_field_save(safe_file)
+                else:
+                    logger.error("Check {}! Not all source are having the right usage".format(self.sources_path))
+        except:
+            raise FileExistsError("File {} does not exist".format(self.sources_path))
+
 #################################################################
 # Multithreading support 
 #################################################################
@@ -428,12 +456,12 @@ class SimulationBase:
 # External functions
 #################################################################
 
-    def view_sim_region(self) -> None:
+    def view_sim_region(self, dpi=150) -> None:
         '''
         plots the simulation region to stdout. Useful to check config file.
         '''
         try:
-            plt.figure(dpi=150)
+            plt.figure(dpi=dpi)
             self.sim.plot2D()
             plt.show()
         except Exception as e:
@@ -500,6 +528,7 @@ class RingResonator(SimulationBase):
                         self.sim.reset_meep()
                         # Run the simulation and collect resonance data
                         self.progress_bar = tqdm(total=self.runtime, desc="Simulation Progress")
+                        clear_cmd()
                         self.sim.run(
                             mp.at_beginning(mp.output_epsilon),
                             mp.after_sources(h),
@@ -533,11 +562,6 @@ class RingResonator(SimulationBase):
         max_q = max(qFactor)
         normalized_q = [q / max_q for q in qFactor]
 
-
-        # plt.scatter(resonances, normalized_q, label="Q factors", color="blue")
-        # plt.xlabel("Frequency")
-        # plt.ylabel("Q Factor")
-        # plt.show()
         # Filter modes with significant Q factors (e.g., >50% of max Q)
         threshold = 0.5
         significant_indices = [i for i, q in enumerate(normalized_q) if q > threshold]
@@ -554,13 +578,6 @@ class RingResonator(SimulationBase):
                 # Plot the Q factors and Gaussian fit
                 x_fit = np.linspace(min(significant_resonances), max(significant_resonances), 500)
                 y_fit = gaussian(x_fit, *popt)
-
-                #plt.scatter(significant_resonances, significant_q, label="Significant Q factors", color="blue")
-                #plt.plot(x_fit, y_fit, label="Gaussian Fit", color="red")
-                #plt.xlabel("Frequency")
-                #plt.ylabel("Q Factor")
-                #plt.legend()
-                #plt.show()
 
                 # Choose the frequency corresponding to the Gaussian mean
                 chosen_frequency = fitted_mean
@@ -634,6 +651,7 @@ class RingResonator(SimulationBase):
                 # allows to run the simulation ONLY if we're loading the correct sources - else aborts
                 valid_simulation_sources = [True for source in sources if source["usage"] == "simulation"]
                 if (len(valid_simulation_sources) == len(sources) and (len(sources) != 0)):
+                    clear_cmd()
                     self.progress_bar = tqdm(total=self.runtime, desc="Simulation Progress")
                     self.sim.run(mp.at_beginning(mp.output_epsilon),
                                  mp.to_appended("{}".format(self.config_file.split(".")[0]), mp.at_every(1, lambda sim: self.progress_callback(sim))),
@@ -645,7 +663,7 @@ class RingResonator(SimulationBase):
                         for elem in self.config_file.split("."):
                             if elem != self.config_file.split(".")[-1]:
                                 safe_file += elem
-                                #safe_file += "."
+                                safe_file += "."
                         safe_file = "ez_" + safe_file + "csv"
                         self._waveguide_ez_field_save(safe_file)
                 else:
@@ -672,23 +690,34 @@ class RingResonator(SimulationBase):
             plot_params_guess: guess for the fitting parameters (default works well for the set example )
             slice: 1d array element of the row in which the linear waveguide sits within the simulation domain
         '''
-        ez_data = self.sim.get_array(center=mp.Vector3(), size=self.simulation_domain, component=mp.Ez)
+        ez_data = self.get_waveguide_ez_field() #self.sim.get_array(center=mp.Vector3(), size=self.simulation_domain, component=mp.Ez)
         plt.plot(ez_data.transpose()[slice],  "--", alpha=0.5, label="simulation")
         xdata_start= 250
         xdata_end = 370
-        ydata = ez_data.transpose()[90][xdata_start:xdata_end]
-        xdata = np.arange(xdata_start, xdata_end)
+        ydata = ez_data.transpose()[90]#[xdata_start:xdata_end]
+        xdata = np.arange(0, len(ydata))#np.arange(xdata_start, xdata_end)
         guess = plot_params_guess
-        popt, pcov = curve_fit(sinus, xdata, ydata, p0=guess)
-        fit_x = np.arange(0, len(ez_data.transpose()[90]))
-        plt.plot(fit_x, sinus(fit_x, *popt), label="extrapolation")
-        plt.plot(xdata, ydata, label='fit range')
+        try:
+            popt, pcov = curve_fit(sinus, xdata, ydata, p0=guess)
+            fit_x = np.arange(0, len(ez_data.transpose()[90]))
+            #plt.plot(fit_x, sinus(fit_x, *popt), label="extrapolation")
+            #plt.plot(xdata, ydata, label='fit range')
+        except:
+            logger.info("No fit found")
+            #plt.plot(xdata, ydata, label='fit range')
         plt.legend()
         plt.xlabel("distance along linear waveguide [arb. u.]")
         plt.ylabel("intensity of e field [arb. u.]")
         plt.plot()
         plt.grid()
+        
 
+
+class LinearWaveguides(SimulationBase):
+    def __init__(self, config_file):
+        super().__init__(config_file)
+        
+        
 def sinus(x, a, b, c):
     return a * np.sin(b * x + c)
 
@@ -721,3 +750,7 @@ def read_property_of_harminv(harminv : mp.Harminv, key):
             raise Exception("Unkown Key")
 
     return property
+
+
+def clear_cmd():
+    os.system('clear')
