@@ -1,11 +1,17 @@
 site_name: SQEALI
-site_url: https://chucknorriscake.github.io/sqeali  # Update with your GitHub username and repo name
-use_directory_urls: false
+site_url: https://chucknorriscake.github.io/sqeali
+use_directory_urls: true 
 docs_dir: docs
-# site_dir: site  # This is MkDocs default, no need to specify unless you want 'public'
 
 theme:
   name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.highlight
+    - search.share
 
 plugins:
   - mkdocstrings:
