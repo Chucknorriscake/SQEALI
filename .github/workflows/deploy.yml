@@ -1,0 +1,21 @@
+site_name: SQEALI
+site_url: https://chucknorriscake.github.io/sqeali  # Update with your GitHub username and repo name
+use_directory_urls: false
+docs_dir: docs
+# site_dir: site  # This is MkDocs default, no need to specify unless you want 'public'
+
+theme:
+  name: material
+
+plugins:
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: google
+
+nav:
+  - Home: index.md
+  - Simulation Base: simbase.md
+  - Ring Resonator: ringresonator.md
+  - Linear Waveguide: linearwaveguide.md
