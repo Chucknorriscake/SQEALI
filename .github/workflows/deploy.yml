@@ -32,7 +32,12 @@ jobs:
           pip install mkdocs mkdocs-material mkdocstrings[python]
           
       - name: Build site
-        run: mkdocs build --verbose
+        run: |
+          mkdocs build --verbose
+          echo "Contents of site directory:"
+          ls -la site/
+          echo "Checking index.html:"
+          head -20 site/index.html
         
       - name: Setup Pages
         uses: actions/configure-pages@v4
