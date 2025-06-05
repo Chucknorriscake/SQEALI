@@ -33,6 +33,7 @@ class SimulationBase:
         self.sources = []
         self.geometry = []
         self.boundary_layers = []
+        self.fluxes = []
         self.simulation_domain = mp.Vector3(10, 10, 0)
         self.resolution = 16
         self.runtime = 3000
@@ -148,7 +149,7 @@ class SimulationBase:
             path (str): Path to the source configuration file.
 
         Returns:
-            list: List of Meep source objects.
+            list (list): List of Meep source objects.
         """
         try:
             with open(path) as f:
@@ -193,7 +194,7 @@ class SimulationBase:
             path (str): Path to the geometry configuration file.
 
         Returns:
-            list: List of Meep geometry objects (Blocks or Cylinders).
+            list (list): List of Meep geometry objects (Blocks or Cylinders).
         """
         try:
             with open(path) as f:
@@ -305,9 +306,10 @@ class SimulationBase:
                     )
 
                     flux_region = mp.FluxRegion(center=center, size=size)
-                    self.sim.add_flux(
+                    flux_object = self.sim.add_flux(
                         self.base_vars["fcen"], self.base_vars["df"], self.base_vars["nfreq"], flux_region
                     )
+                    self.fluxes.append(flux_object)
         except Exception as e:
             logger.error(f"Error adding fluxes: {e}")
 
@@ -526,7 +528,16 @@ class SimulationBase:
             return [[0,0], [0,0]]
         else:
             return self.ez_field
+    
+    def plot_field_result(self) -> None:
+        """
+        Plots the Ez field result using a vertical slice of the simulation domain.
 
+        Args:
+            slice (tuple): A tuple specifying the start and end indices along the y-axis.
+        """
+        plt.imshow(self.ez_field)
+        plt.show()
         
 # Derived class for ring resonator-specific functionality
 class RingResonator(SimulationBase):
@@ -562,11 +573,11 @@ class RingResonator(SimulationBase):
                         center_y = parse_expression(self.base_vars, geom["center_y"])
                         center_z = parse_expression(self.base_vars, geom["center_z"])
                         # Offset the position to a point near the ring's outer edge
-                        y_offset = parse_expression(self.base_vars, geom["radius"]) + 0.5 * self.base_vars["ring_width"]
+                        x_offset = parse_expression(self.base_vars, geom["radius"]) + 0.5 * self.base_vars["ring_width"]
                         # Create a Harminv object for resonance analysis
                         h = mp.Harminv(
                             mp.Ez, 
-                            mp.Vector3(center_x, center_y + y_offset, center_z),
+                            mp.Vector3(center_x + x_offset, center_y, center_z),
                             fcen=self.base_vars["fcen"],
                             df=self.base_vars["df"]
                         )
@@ -585,61 +596,38 @@ class RingResonator(SimulationBase):
                         logger.info(f"Resonances detected: {h.modes}")
                         q = read_property_of_harminv(h, "Q")
                         resonances = read_property_of_harminv(h, "frequency")
-                        self.resonance_frequency = self.get_resonance_from_q_factor(q, resonances)
+                        amplitude = read_property_of_harminv(h, "abs amplitude")
+                        self.resonance_frequency = self.get_resonance_from_q_factor(q, resonances, amplitude)
                         self.resonance_wavelength = 1/self.resonance_frequency
-                        self.write_simulation_config("conf_overcoupling.json", resonance_conf_path)
+                        self.write_simulation_config(self.config_file, resonance_conf_path)
                         #self._append_to_config()
                         
         except Exception as e:
             logger.error(f"Error finding resonances: {e}")
 
-    def get_resonance_from_q_factor(self, qFactor, resonances):
+    def get_resonance_from_q_factor(self, qFactor, resonances, amplitudes):
         """
         Determines the resonance frequency based on the Q factors returned by Harminv.
 
         Args:
             qFactor (list): List of Q factor values.
             resonances (list): Corresponding list of resonance frequencies.
+            amplitudes (list): Corresponding list of resonance amplitudes
 
         Returns:
             float: The selected resonance frequency.
         """
-        # Normalize Q factors
-        max_q = max(qFactor)
-        normalized_q = [q / max_q for q in qFactor]
-
-        # Filter modes with significant Q factors (e.g., >50% of max Q)
-        threshold = 0.5
-        significant_indices = [i for i, q in enumerate(normalized_q) if q > threshold]
-        significant_resonances = [resonances[i] for i in significant_indices]
-        significant_q = [qFactor[i] for i in significant_indices]
-
-        # Fit Gaussian to the significant Q factors
-        if len(significant_resonances) > 3:  # Need at least 3 points for a meaningful fit
-            try:
-                # Perform curve fitting
-                popt, _ = curve_fit(gaussian, significant_resonances, significant_q, p0=[1, resonances[np.argmax(qFactor)], 0.1])
-                fitted_amp, fitted_mean, fitted_std = popt
-
-                # Plot the Q factors and Gaussian fit
-                x_fit = np.linspace(min(significant_resonances), max(significant_resonances), 500)
-                y_fit = gaussian(x_fit, *popt)
-
-                # Choose the frequency corresponding to the Gaussian mean
-                chosen_frequency = fitted_mean
-                print(f"Chosen frequency based on Gaussian fit: {chosen_frequency}")
-                return chosen_frequency
-            except RuntimeError as e:
-                print(f"Gaussian fit failed: {e}")
-                chosen_frequency = resonances[np.argmax(qFactor)]
-                print(f"Defaulting to frequency with highest Q factor: {chosen_frequency}")
-                return chosen_frequency
-        else:
-            # Default to highest Q factor if Gaussian fit is not viable
-            chosen_frequency = resonances[np.argmax(qFactor)]
-            print(f"Chosen frequency with highest Q factor: {chosen_frequency}")
-            return chosen_frequency
-
+        plt.plot(resonances, qFactor)
+        plt.ylabel("qFactor")
+        plt.xlabel("frequencies")
+        plt.show()
+        plt.ylabel("amplitudes")
+        plt.xlabel("frequencies")
+        plt.plot(resonances, amplitudes)
+        plt.show()
+        max_amplitude_index = amplitudes.index(max(amplitudes))
+        return resonances[max_amplitude_index]
+        
     def write_simulation_config(self, base_config_file : str, new_file_name: str):
         """
         Updates the resonance wavelength in the 'base_vars' of the given configuration file
@@ -666,8 +654,8 @@ class RingResonator(SimulationBase):
             else:
                 raise KeyError("The 'source_file' section is missing in the configuration file.")
             # Recompute derived_base_vars if it exists
-            if "derived_base_vars" in config and "fcen" in config["derived_base_vars"]:
-                config["derived_base_vars"]["fcen"] = f"1/{self.resonance_wavelength}"
+            #if "derived_base_vars" in config and "fcen" in config["derived_base_vars"]:
+            #    config["derived_base_vars"]["fcen"] = f"1/{self.resonance_wavelength}"
 
             # Save the updated configuration back to the file
             with open(new_file_name, 'w') as f:
@@ -718,36 +706,29 @@ class RingResonator(SimulationBase):
         except:
             raise FileExistsError("File {} does not exist".format(self.sources_path))
 
-    def plot_field_result(self, slice: tuple) -> None:
-        """
-        Plots the Ez field result using a vertical slice of the simulation domain.
 
-        Args:
-            slice (tuple): A tuple specifying the start and end indices along the y-axis.
-        """
-        plt.imshow(self.ez_field[slice[0]:slice[1]])
-        plt.show()
 
-    def plot_coupling(self, plot_params_guess=[0.08,0.3, 5], slice=90):
+    def plot_coupling(self, plot_params_guess=[0.08,0.3, 5]):
         """
         Fits a sinusoidal curve to the wavefront along the linear waveguide and plots the results.
 
         Args:
             plot_params_guess (list, optional): Initial guess for the sinusoidal fitting parameters.
-            slice (int, optional): Y-axis index corresponding to the waveguide cross-section.
         """
-        ez_data = self.get_waveguide_ez_field() #self.sim.get_array(center=mp.Vector3(), size=self.simulation_domain, component=mp.Ez)
-        plt.plot(ez_data.transpose()[slice],  "--", alpha=0.5, label="simulation")
-        xdata_start= 250
-        xdata_end = 370
-        ydata = ez_data.transpose()[90]#[xdata_start:xdata_end]
-        xdata = np.arange(0, len(ydata))#np.arange(xdata_start, xdata_end)
-        guess = plot_params_guess
+        
+        waveguide_center = int(np.round((self.base_vars["waveguide_xpos"] + self.base_vars["sy"]/2)*self.base_vars["resolution"]))
+        signal = self.ez_field[waveguide_center]
+        
+        xdata = np.arange(0, len(signal))
+        ydata = signal
+        
+        plt.plot(xdata, signal)
         try:
-            popt, pcov = curve_fit(sinus, xdata, ydata, p0=guess)
-            fit_x = np.arange(0, len(ez_data.transpose()[90]))
-            #plt.plot(fit_x, sinus(fit_x, *popt), label="extrapolation")
-            #plt.plot(xdata, ydata, label='fit range')
+            popt, pcov = curve_fit(sinus, xdata[600:700], ydata[600:700], p0=plot_params_guess)
+            print(popt)
+            fit_x = xdata[600:700]
+            plt.plot(fit_x, sinus(fit_x, *popt), label="extrapolation")
+            plt.plot(xdata, ydata, label='fit range')
         except:
             logger.info("No fit found")
             #plt.plot(xdata, ydata, label='fit range')
@@ -871,9 +852,60 @@ class LinearWaveguides(SimulationBase):
         plt.title("Envelope Minima Below 10% Threshold")
         print(np.diff(filtered_min_indices))
         plt.show()
+     
+     
+
+class DBR(SimulationBase):
+    def __init__(self, config_file):
+        """
+        Initializes the LinearWaveguides simulation.
+
+        Args:
+            config_file (str): Path to the configuration file used for setting up the simulation.
+        """
+        super().__init__(config_file)
         
-def sinus(x, a, b, c):
-    return a * np.sin(b * x + c)
+    def _build_geometry(self, path):
+        """
+        Builds geometry objects from a configuration file.
+
+        Args:
+            path (str): Path to the geometry configuration file.
+
+        Returns:
+            list: List of Meep geometry objects (Blocks or Cylinders).
+        """
+        
+        with open(path) as f:
+            geometry_config = json.load(f)
+            geometry = []
+            for i in range(self.base_vars["dbr_number_of_layers"]):
+                x_center = i*(self.base_vars["dbr_layer_1_thickness"]+self.base_vars["dbr_layer_2_thickness"])-self.base_vars["x_offset"]
+                for geom_conf in geometry_config:
+                    center = mp.Vector3(
+                        x_center,
+                        parse_expression(self.base_vars, geom_conf["center_y"]),
+                        parse_expression(self.base_vars, geom_conf["center_z"]),
+                    )
+                    material_index = parse_expression(self.base_vars, geom_conf["material_index"])
+                    if geom_conf["type"] == "mp.Block":
+                        size = mp.Vector3(
+                            parse_expression(self.base_vars, geom_conf["size_x"]),
+                            parse_expression(self.base_vars, geom_conf["size_y"]),
+                            parse_expression(self.base_vars, geom_conf["size_z"]),
+                        )
+                        geometry.append(
+                            mp.Block(
+                                size=size,
+                                center=center,
+                                material=mp.Medium(index=material_index),
+                            )
+                        )
+            return geometry
+
+
+def sinus(x, a, b, c,d):
+    return a * np.sin(b * x + c) + d*x
 
 # Define a Gaussian function for fitting
 def gaussian(x, amp, mean, std_dev):
@@ -893,7 +925,7 @@ def read_property_of_harminv(harminv : mp.Harminv, key):
             property.append(mode.Q) 
         # |amp|
         elif key == "abs amplitude":
-            property.append(np.sqrt(mode.amp.real**2))
+            property.append(np.abs(mode.amp))
         # amplitude
         elif key == "amplitude":
             property.append(np.sqrt(mode.amp.real))

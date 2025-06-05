@@ -1,0 +1,39 @@
+{
+    "base_vars": {
+        "wavelength": 2.438262561568428,
+        "df": 0.05,
+        "nfreq": 500,
+        "radius": 2,
+        "ring_width": 0.4,
+        "n": 2.1,
+        "resolution": 16,
+        "runtime": 1000,
+        "padding": 4,
+        "dpml": 2,
+        "waveguide_padding": 0.6
+    },
+    "derived_base_vars": {
+        "fcen": "1/wavelength",
+        "freqs_min": "fcen-df/2",
+        "freqs_max": "fcen+df/2",
+        "outer_radius": "radius + ring_width",
+        "waveguide_width": "ring_width",
+        "sy": "2*(outer_radius + padding + dpml)",
+        "waveguide_ypos": "-(radius+ ring_width + waveguide_padding)",
+        "sx": "sy + 30"
+    },
+    "cell": {
+        "size_x": "sx",
+        "size_y": "sy",
+        "size_z": "0"
+    },
+    "boundary_layer": [
+        {
+            "type": "mp.PML",
+            "depth": "dpml"
+        }
+    ],
+    "source_file": "transmission/scan_source.json",
+    "geometry_file": "transmission/geometry.json",
+    "flux_file": "transmission/flux.json"
+}

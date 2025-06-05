@@ -1,0 +1,13 @@
+[
+    {   
+        "usage" : "simulation",
+        "type": "mp.GaussianSource",
+        "component": "mp.Ez",
+        "center_x": "-sx/2 + dpml +2",
+        "center_y": "waveguide_ypos",
+        "center_z": "0",
+        "size_x": "0",
+        "size_y": "ring_width",
+        "size_z": "0"
+    }
+]

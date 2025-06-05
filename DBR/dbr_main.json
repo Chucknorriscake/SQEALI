@@ -1,0 +1,46 @@
+{
+    "base_vars": {
+        "wavelength": 1.55,
+        "nfreq": 1000,
+        "resolution": 20,
+        "runtime": 1000,
+        "padding": 2,
+        "dpml": 4,
+        "sy": 14,
+        "dbr_number_of_layers": 20,
+        "dbr_layer_1_n": 4,
+        "dbr_layer_2_n": 1,
+        "dbr_to_flux_2_distance": 7,
+        "source_to_dbr_distance": 7,
+        "source_to_flux_1_distance": 1
+    },
+    "derived_base_vars": {
+        "fcen": "1/wavelength",
+        "df": "1.5 * fcen",
+        "freqs_min": "fcen-df/2",
+        "freqs_max": "fcen+df/2",
+        "dbr_layer_1_thickness": "wavelength/(4*dbr_layer_1_n)",
+        "dbr_layer_2_thickness": "wavelength/(4*dbr_layer_2_n)",
+        "total_dbr_thickness": "dbr_number_of_layers/2*(dbr_layer_1_thickness+dbr_layer_2_thickness)",
+        "sx": "2*(dpml+padding) + total_dbr_thickness + source_to_dbr_distance + dbr_to_flux_2_distance",
+        "source_height": "0",
+        "flux_height": "0",
+        "x_offset": "total_dbr_thickness/2",
+        "dbr_left_edge": "-x_offset",
+        "dbr_right_edge": "x_offset"
+    },
+    "cell": {
+        "size_x": "sx",
+        "size_y": "0",
+        "size_z": "0"
+    },
+    "boundary_layer": [
+        {
+            "type": "mp.PML",
+            "depth": "dpml"
+        }
+    ],
+    "source_file": "source.json",
+    "geometry_file": "geometry.json",
+    "flux_file": "flux.json"
+}

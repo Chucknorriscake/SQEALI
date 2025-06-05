@@ -1,0 +1,18 @@
+[
+    {
+        "size_x": "0",
+        "size_y": " 0.5*ring_width",
+        "size_z": "0",
+        "center_x": "-sx/2 +dpml + 0.5+3",
+        "center_y": "waveguide_xpos",
+        "center_z": "0"
+    },
+    {
+        "size_x": "0",
+        "size_y": " 0.5*ring_width",
+        "size_z": "0",
+        "center_x": "sx/2 -dpml - 0.5",
+        "center_y": "waveguide_xpos",
+        "center_z": "0"
+    }
+]

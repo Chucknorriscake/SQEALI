@@ -1,0 +1,12 @@
+[
+    {
+        "type": "mp.Block",
+        "size_x": "dbr_layer_1_thickness",
+        "size_y": "1e20",
+        "size_z": "1e20",
+        "center_x": "0",
+        "center_y": "0",
+        "center_z": "0",
+        "material_index": "dbr_layer_1_n"
+    }
+]

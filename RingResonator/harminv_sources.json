@@ -1,0 +1,13 @@
+[
+    {   
+        "usage" : "harminv",
+        "type": "mp.GaussianSource",
+        "component": "mp.Ez",
+        "center_x": "outer_radius-(ring_width/2)",
+        "center_y": "0",
+        "center_z": "0",
+        "size_x": "0.5*ring_width",
+        "size_y": "0",
+        "size_z": "0"
+    }
+]

@@ -1,0 +1,20 @@
+[
+        {
+            "name": "reflection",
+            "size_x": "0",
+            "size_y": "flux_height",
+            "size_z": "0",
+            "center_x": "dbr_left_edge - source_to_dbr_distance + source_to_flux_1_distance",
+            "center_y": "0",
+            "center_z": "0"
+        },
+        {
+            "name": "transmission",
+            "size_x": "0",
+            "size_y": "flux_height",
+            "size_z": "0",
+            "center_x": "dbr_right_edge + dbr_to_flux_2_distance",
+            "center_y": "0",
+            "center_z": "0"
+        }
+    ]

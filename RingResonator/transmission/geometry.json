@@ -1,0 +1,28 @@
+[
+    {
+        "type": "mp.Cylinder",
+        "radius": "outer_radius",
+        "center_x": "0",
+        "center_y": "0",
+        "center_z": "0",
+        "material_index": "n"
+    },
+    {
+        "type": "mp.Cylinder",
+        "radius": "radius",
+        "center_x": "0",
+        "center_y": "0",
+        "center_z": "0",
+        "material_index": "1"
+    },
+    {
+        "type": "mp.Block",
+        "size_x": "1e20",
+        "size_y": "waveguide_width",
+        "size_z": "1e20",
+        "center_x": "0",
+        "center_y": "waveguide_ypos",
+        "center_z": "0",
+        "material_index": "n"
+    }
+]

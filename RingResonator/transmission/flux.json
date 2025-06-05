@@ -1,0 +1,11 @@
+[
+
+    {
+        "size_x": "0",
+        "size_y": "2*waveguide_width",
+        "size_z": "0",
+        "center_x": "sx/2 -dpml - 0.5",
+        "center_y": "waveguide_ypos",
+        "center_z": "0"
+    }
+]
